@@ -1,0 +1,166 @@
+{
+  "products": [
+    {
+      "id": "pr1",
+      "name": "BA200 Fully Automated Biochemistry Analyzer",
+      "division": "diagnostics",
+      "partner": "BioSystems",
+      "description": "Fully automated biochemistry analyzer with throughput up to 200 tests per hour and LED technology for dependable routine laboratory testing.",
+      "image": "/images/products/ba200.png",
+      "featured": true
+    },
+    {
+      "id": "pr2",
+      "name": "HemaCount Pro 5-Diff",
+      "division": "diagnostics",
+      "partner": "LabTech Solutions",
+      "description": "Five-part differential hematology analyzer with automated slide preparation and digital morphology support for busy clinical laboratories.",
+      "image": "",
+      "featured": true
+    },
+    {
+      "id": "pr3",
+      "name": "RapidPOC Troponin System",
+      "division": "diagnostics",
+      "partner": "DiagnoCore",
+      "description": "Point-of-care cardiac troponin and cardiac panel analyzer designed for emergency departments and critical decision workflows.",
+      "image": "",
+      "featured": true
+    },
+    {
+      "id": "pr4",
+      "name": "ImmunoFlux Analyzer",
+      "division": "diagnostics",
+      "partner": "MedScan International",
+      "description": "Automated immunofluorescence and ANA testing platform for autoimmune disease diagnosis and specialist laboratory workflows.",
+      "image": "",
+      "featured": false
+    },
+    {
+      "id": "pr5",
+      "name": "UrineFlow 200",
+      "division": "diagnostics",
+      "partner": "ClinPath Technologies",
+      "description": "Automated urine chemistry and sediment analyzer with assisted particle classification for faster urinalysis review.",
+      "image": "",
+      "featured": false
+    },
+    {
+      "id": "pr6",
+      "name": "MicroID Bacterial System",
+      "division": "diagnostics",
+      "partner": "AquaDx Systems",
+      "description": "Rapid bacterial identification and antibiotic susceptibility testing platform for microbiology laboratories.",
+      "image": "",
+      "featured": false
+    },
+    {
+      "id": "pr7",
+      "name": "SteamMaster Class B 134",
+      "division": "disinfection",
+      "partner": "SterilPro Europe",
+      "description": "Benchtop Class B pre-vacuum steam sterilizer for dental and surgical instruments with an 18-litre chamber.",
+      "image": "",
+      "featured": true
+    },
+    {
+      "id": "pr8",
+      "name": "PlasmaVac 80 Low-Temp Sterilizer",
+      "division": "disinfection",
+      "partner": "PureSteril Tech",
+      "description": "Hydrogen peroxide plasma sterilizer for heat-sensitive and moisture-sensitive medical devices, with capacity up to 80 litres.",
+      "image": "",
+      "featured": true
+    },
+    {
+      "id": "pr9",
+      "name": "EndoWash Pro Reprocessor",
+      "division": "disinfection",
+      "partner": "EndoCare Solutions",
+      "description": "Automated endoscope washer-disinfector with integrated leak testing and traceability reporting.",
+      "image": "",
+      "featured": false
+    },
+    {
+      "id": "pr10",
+      "name": "AirClean UV-C Tower",
+      "division": "disinfection",
+      "partner": "AeroClean Medical",
+      "description": "Mobile UV-C air and surface disinfection system for operating theatres, ICUs, isolation rooms, and procedure areas.",
+      "image": "",
+      "featured": false
+    },
+    {
+      "id": "pr11",
+      "name": "ChemDisinfect HD Concentrate",
+      "division": "disinfection",
+      "partner": "HyGiene Systems",
+      "description": "Aldehyde-free broad-spectrum surface disinfectant concentrate validated against bacteria, fungi, and viruses.",
+      "image": "",
+      "featured": false
+    },
+    {
+      "id": "pr12",
+      "name": "SterCheck Biological Indicator",
+      "division": "disinfection",
+      "partner": "CleanCycle Bio",
+      "description": "Rapid-read biological indicator for steam sterilization cycles with results in 1 to 3 hours.",
+      "image": "",
+      "featured": false
+    },
+    {
+      "id": "pr13",
+      "name": "DermaLase 1064/532 Pro",
+      "division": "care",
+      "partner": "DermaLight Systems",
+      "description": "Dual-wavelength Nd:YAG Q-switched laser for tattoo removal, pigmentation, and skin rejuvenation procedures.",
+      "image": "",
+      "featured": true
+    },
+    {
+      "id": "pr14",
+      "name": "SkinRite RF Body Contouring",
+      "division": "care",
+      "partner": "AestheTech Europe",
+      "description": "Multipolar RF and EMS platform for non-invasive body contouring, skin tightening, and cellulite reduction.",
+      "image": "",
+      "featured": true
+    },
+    {
+      "id": "pr15",
+      "name": "VitalGuard 15 ICU Monitor",
+      "division": "care",
+      "partner": "CriticalMed Devices",
+      "description": "Bedside 15-inch touchscreen patient monitor with 12-lead ECG, SpO2, NIBP, etCO2, and IBP modules.",
+      "image": "",
+      "featured": false
+    },
+    {
+      "id": "pr16",
+      "name": "BreathePro ICU Ventilator",
+      "division": "care",
+      "partner": "BreatheTech Medical",
+      "description": "Adult and pediatric ICU ventilator with advanced ventilation modes for critical care environments.",
+      "image": "",
+      "featured": false
+    },
+    {
+      "id": "pr17",
+      "name": "InfuPro Syringe Driver",
+      "division": "care",
+      "partner": "InfuCare Systems",
+      "description": "Smart syringe pump with drug library support, dose error reduction software, and fleet management capability.",
+      "image": "",
+      "featured": false
+    },
+    {
+      "id": "pr18",
+      "name": "FractiCO2 Laser System",
+      "division": "care",
+      "partner": "OptiDerm Solutions",
+      "description": "Fractional CO2 laser for skin resurfacing, scar treatment, and dermatological procedures.",
+      "image": "",
+      "featured": false
+    }
+  ]
+}

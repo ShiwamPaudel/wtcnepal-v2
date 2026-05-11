@@ -1,0 +1,39 @@
+{
+  "team": [
+    {
+      "id": "t1",
+      "name": "Rajesh Paudel",
+      "title": "Managing Director",
+      "bio": "Leading WTC Nepal with a focus on healthcare innovation, strategic partnerships, and operational excellence across all provinces.",
+      "email": "rajesh.paudel@wtcnepal.com"
+    },
+    {
+      "id": "t2",
+      "name": "Sanjay Shah",
+      "title": "Head of Business Development",
+      "bio": "Drives partner engagement, market expansion, and customer success for healthcare institutions nationwide.",
+      "email": "sanjay.shah@wtcnepal.com"
+    },
+    {
+      "id": "t3",
+      "name": "Meera Adhikari",
+      "title": "Clinical Applications Manager",
+      "bio": "Provides technical training, product demonstrations, and application support for diagnostics and clinical care solutions.",
+      "email": "meera.adhikari@wtcnepal.com"
+    },
+    {
+      "id": "t4",
+      "name": "Anil Thapa",
+      "title": "Head of Service and Support",
+      "bio": "Oversees nationwide biomedical service teams and ensures rapid response for installation, maintenance, and calibration.",
+      "email": "anil.thapa@wtcnepal.com"
+    },
+    {
+      "id": "t5",
+      "name": "Priya Gurung",
+      "title": "Marketing and Communications Lead",
+      "bio": "Shapes brand presence, customer stories, and communications across digital and field channels.",
+      "email": "priya.gurung@wtcnepal.com"
+    }
+  ]
+}

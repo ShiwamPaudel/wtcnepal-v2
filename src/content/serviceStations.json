@@ -1,0 +1,31 @@
+{
+  "serviceStations": [
+    {
+      "id": "kathmandu",
+      "city": "Kathmandu",
+      "address": "Kumari Marga, Tripureshwor, Kathmandu, Nepal",
+      "phone": "+977 01 536 2654",
+      "hours": "Sunday-Friday: 9:00 AM-5:30 PM",
+      "isHQ": true,
+      "mapLink": "https://maps.google.com/?q=Tripureshwor,Kathmandu,Nepal"
+    },
+    {
+      "id": "biratnagar",
+      "city": "Biratnagar",
+      "address": "Biratnagar, Koshi Province, Nepal",
+      "phone": "+977 21 5XXXXX",
+      "hours": "Sunday-Friday: 9:00 AM-5:30 PM",
+      "isHQ": false,
+      "mapLink": "https://maps.google.com/?q=Biratnagar,Nepal"
+    },
+    {
+      "id": "chitwan",
+      "city": "Chitwan",
+      "address": "Bharatpur, Chitwan, Bagmati Province, Nepal",
+      "phone": "+977 56 5XXXXX",
+      "hours": "Sunday-Friday: 9:00 AM-5:30 PM",
+      "isHQ": false,
+      "mapLink": "https://maps.google.com/?q=Bharatpur,Chitwan,Nepal"
+    }
+  ]
+}

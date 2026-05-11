@@ -1,0 +1,130 @@
+{
+  "partners": [
+    {
+      "id": "p1",
+      "name": "Diasorin",
+      "country": "Italy",
+      "image": "/images/Partners/DiaSorin.png",
+      "division": "diagnostics",
+      "description": "Advanced clinical chemistry and immunoassay systems for hospital and reference laboratories.",
+      "website": "#"
+    },
+    {
+      "id": "p2",
+      "name": "BioSystems",
+      "country": "Spain",
+      "image": "/images/Partners/BioSystems.png",
+      "division": "diagnostics",
+      "description": "High-throughput hematology and coagulation analyzers with dependable precision.",
+      "website": "#"
+    },
+    {
+      "id": "p3",
+      "name": "i-SENS",
+      "country": "Korea",
+      "image": "/images/Partners/iSens.png",
+      "division": "diagnostics",
+      "description": "Point-of-care testing and molecular diagnostics platforms for rapid, accurate results.",
+      "website": "#"
+    },
+    {
+      "id": "p4",
+      "name": "Eppendorf",
+      "country": "Germany",
+      "image": "/images/Partners/eppendorf.png",
+      "division": "diagnostics",
+      "description": "Liquid handling, sample handling, and laboratory workflow technology for research and clinical labs.",
+      "website": "#"
+    },
+    {
+      "id": "p5",
+      "name": "Biocartis",
+      "country": "Belgium",
+      "image": "/images/Partners/Biocartis.png",
+      "division": "diagnostics",
+      "description": "Molecular diagnostics technology supporting streamlined oncology and infectious disease workflows.",
+      "website": "#"
+    },
+    {
+      "id": "p10",
+      "name": "Diversey Taski",
+      "country": "Switzerland",
+      "image": "/images/Partners/Diversey.png",
+      "division": "disinfection",
+      "description": "Cleaning, hygiene, and floor care solutions for healthcare environments.",
+      "website": "#"
+    },
+    {
+      "id": "p11",
+      "name": "Ecosteryl",
+      "country": "Belgium",
+      "image": "/images/Partners/ecosteryl.png",
+      "division": "disinfection",
+      "description": "Medical waste treatment and sterilization technology for safer healthcare waste handling.",
+      "website": "#"
+    },
+    {
+      "id": "p12",
+      "name": "Hakerman",
+      "country": "Turkey",
+      "image": "/images/Partners/Hakerman.png",
+      "division": "disinfection",
+      "description": "Sterilization and liquid waste treatment systems for infection prevention programs.",
+      "website": "#"
+    },
+    {
+      "id": "p13",
+      "name": "Newster",
+      "country": "Italy",
+      "image": "/images/Partners/newster.png",
+      "division": "disinfection",
+      "description": "Automated healthcare waste sterilization systems and infection control technology.",
+      "website": "#"
+    },
+    {
+      "id": "p18",
+      "name": "Nihon Kohden",
+      "country": "USA",
+      "image": "/images/Partners/Nihon Kohden.png",
+      "division": "care",
+      "description": "Patient monitoring and critical care technologies for hospital care environments.",
+      "website": "#"
+    },
+    {
+      "id": "p19",
+      "name": "Asclepion Laser Technologies",
+      "country": "Germany",
+      "image": "/images/Partners/asclepion.png",
+      "division": "care",
+      "description": "Medical laser systems for dermatology, aesthetics, and specialist treatment settings.",
+      "website": "#"
+    },
+    {
+      "id": "p20",
+      "name": "Nesa World",
+      "country": "Spain",
+      "image": "/images/Partners/Nesa World.png",
+      "division": "care",
+      "description": "Non-invasive neuromodulation systems supporting advanced patient care programs.",
+      "website": "#"
+    },
+    {
+      "id": "p21",
+      "name": "Bison",
+      "country": "Korea",
+      "image": "/images/Partners/Bison.png",
+      "division": "care",
+      "description": "Dermatology and aesthetic laser technology for clinical and specialist practices.",
+      "website": "#"
+    },
+    {
+      "id": "p22",
+      "name": "DermaIndia",
+      "country": "India",
+      "image": "/images/Partners/DermaIndia.png",
+      "division": "care",
+      "description": "Dermatology setup accessories and care technology for clinics and treatment centers.",
+      "website": "#"
+    }
+  ]
+}
