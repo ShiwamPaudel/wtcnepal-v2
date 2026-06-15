@@ -101,10 +101,12 @@ export const divisions: DivisionInfo[] = [
       'Plasma Sterilizer, Steam Sterilizer & Washer Disinfectors',
     ],
     categories: [
-      { name: 'Floor scrubbing automation', partner: 'Diversey Taski' },
-      { name: 'Disinfectants and housekeeping solutions', partner: 'Diversey Taski' },
-      { name: 'Sterilizers for solid waste', partner: 'Newster and Ecosteryl' },
-      { name: 'Sterilizers for liquid waste', partner: 'Hakerman' },
+      { name: 'Cleaning & Scrubbing Automations', partner: 'Taski' },
+      { name: 'Chemicals, Mops, Tools & Accessories', partner: 'Diversey' },
+      { name: 'Solid Waste Sterilizer with Continuous Microwave Technology', partner: 'Ecosteryl' },
+      { name: 'Liquid Waste Treatment Plant', partner: 'Hakerman' },
+      { name: 'Solid Waste Sterilizer with Frictional Heat Technology', partner: 'Newster' },
+      { name: 'Plasma Sterilizer, Steam Sterilizer & Washer Disinfectors', partner: 'Sterilmed' },
     ],
     benefits: [
       {
