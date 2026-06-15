@@ -137,7 +137,6 @@ export default async function PartnerPage({ params }: Props) {
                 <h3 className="mt-4 text-lg font-bold text-slate-950 transition group-hover:text-[var(--color-primary)]">
                   {product.name}
                 </h3>
-                <p className="mt-2 flex-1 text-sm leading-6 text-slate-600">{product.description}</p>
                 <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-primary)]">
                   View product
                   <ArrowRight className="h-4 w-4" />
