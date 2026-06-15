@@ -18,7 +18,7 @@ export function NewsCard({ article }: NewsCardProps) {
 
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
-      <Link href={`/news/${article.slug}`} className="relative block aspect-[4/3] overflow-hidden bg-slate-100">
+      <Link href={`/news-and-events/${article.slug}`} className="relative block aspect-[4/3] overflow-hidden bg-slate-100">
         {article.image ? (
           <Image
             src={article.image}
@@ -26,6 +26,7 @@ export function NewsCard({ article }: NewsCardProps) {
             fill
             sizes="(max-width: 768px) 90vw, 33vw"
             className="object-cover transition-transform duration-500 group-hover:scale-105"
+            unoptimized={article.image.startsWith('/api/media/')}
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-blue-50 via-slate-50 to-sky-50 p-6 text-center">
@@ -44,13 +45,13 @@ export function NewsCard({ article }: NewsCardProps) {
         </div>
 
         <h3 className="line-clamp-2 text-lg font-bold leading-snug text-slate-950 transition group-hover:text-[var(--color-primary)]">
-          <Link href={`/news/${article.slug}`}>{article.title}</Link>
+          <Link href={`/news-and-events/${article.slug}`}>{article.title}</Link>
         </h3>
 
         <p className="mt-3 line-clamp-3 flex-1 text-sm leading-6 text-slate-600">{article.excerpt}</p>
 
         <Link
-          href={`/news/${article.slug}`}
+          href={`/news-and-events/${article.slug}`}
           className="mt-6 inline-flex items-center text-sm font-semibold text-[var(--color-primary)] transition hover:text-[var(--color-accent)]"
         >
           Read article

@@ -19,25 +19,25 @@ export const divisionTheme: Record<
   }
 > = {
   diagnostics: {
-    text: 'text-blue-700',
-    border: 'border-blue-200',
+    text: 'text-[#004aad]',
+    border: 'border-[#004aad]',
     bg: 'bg-blue-50',
-    badge: 'bg-blue-50 text-blue-700 ring-blue-200',
+    badge: 'bg-blue-50 text-[#004aad] ring-[#004aad]/25',
     accent: '#004aad',
   },
   disinfection: {
-    text: 'text-emerald-700',
-    border: 'border-emerald-200',
-    bg: 'bg-emerald-50',
-    badge: 'bg-emerald-50 text-emerald-700 ring-emerald-200',
-    accent: '#0f8f61',
+    text: 'text-[#ffbd59]',
+    border: 'border-[#ffbd59]',
+    bg: 'bg-[#fff4df]',
+    badge: 'bg-[#fff4df] text-[#ffbd59] ring-[#ffbd59]/35',
+    accent: '#ffbd59',
   },
   care: {
-    text: 'text-sky-700',
-    border: 'border-sky-200',
-    bg: 'bg-sky-50',
-    badge: 'bg-sky-50 text-sky-700 ring-sky-200',
-    accent: '#0284c7',
+    text: 'text-[#38b6ff]',
+    border: 'border-[#38b6ff]',
+    bg: 'bg-[#e9f7ff]',
+    badge: 'bg-[#e9f7ff] text-[#38b6ff] ring-[#38b6ff]/35',
+    accent: '#38b6ff',
   },
 };
 

@@ -9,6 +9,8 @@ export const metadata: Metadata = constructMetadata({
   path: '/divisions/disinfection',
 });
 
+export const dynamic = 'force-dynamic';
+
 export default function DisinfectionPage() {
   return <DivisionDetailPage divisionId="disinfection" />;
 }

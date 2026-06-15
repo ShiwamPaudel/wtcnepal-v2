@@ -74,7 +74,7 @@ export function Footer() {
                 ['Global partners', '/partners'],
                 ['Service network', '/service-network'],
                 ['Career', '/career'],
-                ['News', '/news'],
+                ['News and Events', '/news-and-events'],
               ].map(([label, href]) => (
                 <li key={href}>
                   <Link href={href} className="text-slate-300 transition hover:text-white">

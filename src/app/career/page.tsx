@@ -1,10 +1,12 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { ArrowRight, Clock, GraduationCap, MapPin, Wrench } from 'lucide-react';
+import { CareerApplicationForm } from '@/components/CareerApplicationForm';
 import { constructMetadata } from '@/lib/seo';
+import { getPublishedJobs } from '@/lib/server-content';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'Careers at WTC Nepal | Healthcare Technology Team',
+  title: 'Careers - Web Trading Concern Pvt. Ltd.',
   description:
     'Explore career opportunities at WTC Nepal for biomedical service, healthcare technology, business development, and customer support roles.',
   path: '/career',
@@ -31,9 +33,11 @@ const benefits = [
   },
 ];
 
-export default function CareerPage() {
+export default async function CareerPage() {
+  const jobs = await getPublishedJobs();
+
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white pt-20">
       <section className="border-b border-slate-200 py-20">
         <div className="container-xl">
           <div className="max-w-4xl">
@@ -71,58 +75,62 @@ export default function CareerPage() {
         <div className="container-xl">
           <div className="mx-auto max-w-4xl">
             <div className="text-center">
-              <p className="text-sm font-semibold text-[var(--color-primary)]">Current opening</p>
-              <h2 className="mt-3 text-3xl font-bold text-slate-950">Field Service Engineer</h2>
+              <p className="text-sm font-semibold text-[var(--color-primary)]">Current openings</p>
+              <h2 className="mt-3 text-3xl font-bold text-slate-950">Current opportunities</h2>
               <p className="mt-4 text-lg leading-8 text-slate-600">
-                We are looking for biomedical engineers or technicians who can support equipment
-                installation, maintenance, troubleshooting, and user training.
+                Explore open roles and share your application with the WTC Nepal team.
               </p>
             </div>
 
-            <article className="mt-10 rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
-              <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
-                <div>
-                  <h3 className="text-2xl font-bold text-slate-950">Field Service Engineer</h3>
-                  <p className="mt-2 text-slate-600">Technical support and maintenance</p>
-                  <div className="mt-5 flex flex-wrap gap-4 text-sm text-slate-500">
-                    <span className="inline-flex items-center gap-1.5">
-                      <MapPin className="h-4 w-4" />
-                      Kathmandu with travel
-                    </span>
-                    <span className="inline-flex items-center gap-1.5">
-                      <Clock className="h-4 w-4" />
-                      Full-time
-                    </span>
+            <div className="mt-10 grid gap-6">
+              {jobs.map((job) => (
+                <article key={job.id} className="modern-surface rounded-2xl p-6">
+                  <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+                    <div>
+                      <h3 className="text-2xl font-bold text-slate-950">{job.title}</h3>
+                      <p className="mt-2 text-slate-600">{job.department}</p>
+                      <p className="mt-4 max-w-3xl text-sm leading-6 text-slate-600">{job.summary}</p>
+                      <div className="mt-5 flex flex-wrap gap-4 text-sm text-slate-500">
+                        <span className="inline-flex items-center gap-1.5">
+                          <MapPin className="h-4 w-4" />
+                          {job.location}
+                        </span>
+                        <span className="inline-flex items-center gap-1.5">
+                          <Clock className="h-4 w-4" />
+                          {job.type}
+                        </span>
+                      </div>
+                    </div>
+                    <a
+                      href={`#apply-${job.id}`}
+                      className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--color-primary)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-slate-950"
+                    >
+                      Apply now
+                      <ArrowRight className="h-4 w-4" />
+                    </a>
                   </div>
-                </div>
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--color-primary)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--color-accent)]"
-                >
-                  Apply now
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </div>
 
-              <div className="mt-8 grid gap-5 border-t border-slate-200 pt-6 md:grid-cols-2">
-                <div>
-                  <h4 className="font-bold text-slate-950">Responsibilities</h4>
-                  <ul className="mt-3 space-y-2 text-sm leading-6 text-slate-600">
-                    <li>Install, inspect, and maintain medical equipment.</li>
-                    <li>Support customers with troubleshooting and operator guidance.</li>
-                    <li>Coordinate service reports, spare parts, and follow-up visits.</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="font-bold text-slate-950">Helpful experience</h4>
-                  <ul className="mt-3 space-y-2 text-sm leading-6 text-slate-600">
-                    <li>Biomedical engineering, electronics, or related technical training.</li>
-                    <li>Hands-on experience with medical equipment service workflows.</li>
-                    <li>Clear communication and willingness to travel for field support.</li>
-                  </ul>
-                </div>
-              </div>
-            </article>
+                  <div className="mt-8 grid gap-5 border-t border-slate-200 pt-6 md:grid-cols-2">
+                    <div>
+                      <h4 className="font-bold text-slate-950">Responsibilities</h4>
+                      <ul className="mt-3 space-y-2 text-sm leading-6 text-slate-600">
+                        {job.responsibilities.map((item) => <li key={item}>{item}</li>)}
+                      </ul>
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-slate-950">Helpful experience</h4>
+                      <ul className="mt-3 space-y-2 text-sm leading-6 text-slate-600">
+                        {job.requirements.map((item) => <li key={item}>{item}</li>)}
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div id={`apply-${job.id}`}>
+                    <CareerApplicationForm jobId={job.id} jobTitle={job.title} />
+                  </div>
+                </article>
+              ))}
+            </div>
 
             <div className="mt-10 text-center">
               <p className="text-slate-600">

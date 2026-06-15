@@ -1,9 +1,8 @@
 import type { MetadataRoute } from 'next';
 import { divisions } from '@/data/divisions';
-import { newsArticles } from '@/data/news';
 import { partners } from '@/data/partners';
-import { products } from '@/data/products';
 import { siteConfig } from '@/lib/seo';
+import { getPublishedNewsArticles, getProducts } from '@/lib/server-content';
 
 const staticRoutes = [
   '',
@@ -11,14 +10,15 @@ const staticRoutes = [
   '/career',
   '/contact',
   '/divisions',
-  '/news',
+  '/news-and-events',
   '/partners',
   '/products',
   '/service-network',
   '/team',
 ];
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const [products, newsArticles] = await Promise.all([getProducts(), getPublishedNewsArticles()]);
   const now = new Date();
 
   const routes = [
@@ -27,7 +27,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...divisions.map((division) => `/divisions/${division.id}/categories`),
     ...products.map((product) => `/products/${product.id}`),
     ...partners.map((partner) => `/partners/${partner.id}`),
-    ...newsArticles.map((article) => `/news/${article.slug}`),
+    ...newsArticles.map((article) => `/news-and-events/${article.slug}`),
   ];
 
   return routes.map((route) => ({

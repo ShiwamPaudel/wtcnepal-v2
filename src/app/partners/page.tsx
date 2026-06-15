@@ -7,7 +7,7 @@ import { constructMetadata } from '@/lib/seo';
 import { getDivisionLabel } from '@/lib/content';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'Global Medical Equipment Partners',
+  title: 'Our Global Partners',
   description:
     'Explore WTC Nepal global partner brands across diagnostics, disinfection, and care medical equipment for healthcare providers in Nepal.',
   path: '/partners',
@@ -19,13 +19,12 @@ export default function PartnersPage() {
       <section className="border-b border-slate-200 py-20">
         <div className="container-xl">
           <div className="max-w-4xl">
-            <p className="text-sm font-bold text-[var(--color-primary)]">Global partners</p>
+            <p className="text-sm font-bold text-[var(--color-primary)]">Our Global Partners</p>
             <h1 className="mt-4 text-4xl font-bold leading-tight text-slate-950 md:text-5xl">
-              Partner brands powering healthcare technology in Nepal
+              
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">
-              WTC Nepal works with international manufacturers to supply dependable equipment,
-              training, and technical support across our three healthcare divisions.
+             
             </p>
           </div>
         </div>

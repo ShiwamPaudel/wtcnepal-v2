@@ -8,6 +8,7 @@ export interface Product {
   partner: string;
   description: string;
   image: string;
+  images?: string[];
   featured?: boolean;
   brochure?: string;
 }

@@ -9,6 +9,8 @@ export const metadata: Metadata = constructMetadata({
   path: '/divisions/care',
 });
 
+export const dynamic = 'force-dynamic';
+
 export default function CarePage() {
   return <DivisionDetailPage divisionId="care" />;
 }

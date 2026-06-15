@@ -30,6 +30,7 @@ export function ProductArtwork({
           sizes="(max-width: 768px) 90vw, (max-width: 1200px) 40vw, 280px"
           className="object-contain p-6 transition-transform duration-300 group-hover:scale-105"
           priority={priority}
+          unoptimized={image.startsWith('/api/media/')}
         />
       ) : (
         <div className={`flex h-full w-full flex-col items-center justify-center gap-3 p-6 text-center ${theme.bg}`}>

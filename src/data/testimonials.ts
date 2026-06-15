@@ -17,7 +17,7 @@ export const partnerTestimonials: Testimonial[] = [
     institutionLogo: '/images/Partners/BioSystems.png',
     image: '/images/Testimonials/pau.jpg',
     quote: 'Its a privilege to be your partner.',
-    youtube: '',
+    youtube: 'https://www.youtube.com/watch?v=qH1A2mk3OCI',
   },
   {
     name: 'Mr. David Ahn',

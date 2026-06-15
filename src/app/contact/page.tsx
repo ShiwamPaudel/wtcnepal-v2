@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Clock, Mail, MapPin, Phone } from 'lucide-react';
 import ContactForm from '@/components/ContactForm';
-import { serviceStations } from '@/data/serviceStations';
 import { constructMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = constructMetadata({
@@ -80,35 +79,6 @@ export default function ContactPage() {
             </div>
 
             <ContactForm />
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-slate-50 py-16">
-        <div className="container-xl">
-          <div className="max-w-3xl">
-            <p className="text-sm font-semibold text-[var(--color-primary)]">Service reach</p>
-            <h2 className="mt-3 text-3xl font-bold text-slate-950">Service locations</h2>
-            <p className="mt-4 text-lg leading-8 text-slate-600">
-              WTC Nepal supports healthcare providers through Kathmandu headquarters and regional
-              service touchpoints.
-            </p>
-          </div>
-
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {serviceStations.map((station) => (
-              <article key={station.id} className="rounded-lg border border-slate-200 bg-white p-6">
-                <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-blue-50 text-[var(--color-primary)]">
-                  <MapPin className="h-5 w-5" />
-                </div>
-                <h3 className="mt-5 text-xl font-bold text-slate-950">
-                  {station.city}
-                  {station.isHQ ? ' HQ' : ''}
-                </h3>
-                <p className="mt-2 text-sm leading-6 text-slate-600">{station.address}</p>
-                <p className="mt-3 text-sm font-medium text-slate-500">{station.phone}</p>
-              </article>
-            ))}
           </div>
         </div>
       </section>

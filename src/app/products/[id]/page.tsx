@@ -1,25 +1,35 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { ArrowLeft, ArrowRight, CheckCircle2 } from 'lucide-react';
-import { ProductArtwork } from '@/components/ui/ProductArtwork';
-import { divisions } from '@/data/divisions';
-import { getProductById, products } from '@/data/products';
+import { ArrowLeft } from 'lucide-react';
+import { ProductGallery } from '@/components/ProductGallery';
+import { RelevantProductsSlider } from '@/components/RelevantProductsSlider';
+import ProductBrochureModal from '@/components/ui/ProductBrochureModal';
+import { RichText } from '@/components/ui/RichText';
+import type { Product } from '@/data/products';
 import { constructMetadata, siteConfig } from '@/lib/seo';
 import { getBreadcrumbSchema, getProductSchema } from '@/lib/structured-data';
-import { getDivisionLabel } from '@/lib/content';
+import { getDivisionLabel, hasUsableImage } from '@/lib/content';
+import { getProductById, getProducts } from '@/lib/server-content';
 
 type Props = {
   params: Promise<{ id: string }>;
 };
 
-export function generateStaticParams() {
+function getProductImages(product: Product) {
+  const images = Array.isArray(product.images) ? product.images : [];
+  return [product.image, ...images].filter(hasUsableImage).filter((image, index, list) => list.indexOf(image) === index);
+}
+
+export async function generateStaticParams() {
+  const products = await getProducts();
+
   return products.map((product) => ({ id: product.id }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
-  const product = getProductById(id);
+  const product = await getProductById(id);
 
   if (!product) {
     return constructMetadata({
@@ -40,16 +50,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ProductSinglePage({ params }: Props) {
   const { id } = await params;
-  const product = getProductById(id);
+  const product = await getProductById(id);
+  const products = await getProducts();
 
   if (!product) {
     notFound();
   }
 
-  const division = divisions.find((item) => item.id === product.division);
   const relatedProducts = products
     .filter((item) => item.id !== product.id && item.division === product.division)
-    .slice(0, 3);
+    .slice(0, 10);
+  const productImages = getProductImages(product);
 
   const jsonLd = [
     getProductSchema(product),
@@ -73,13 +84,40 @@ export default async function ProductSinglePage({ params }: Props) {
           </Link>
 
           <div className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,520px)_minmax(0,1fr)] lg:items-center">
-            <ProductArtwork
-              name={product.name}
-              image={product.image}
-              division={product.division}
-              priority
-              className="aspect-[4/3] rounded-lg border border-slate-200 bg-white shadow-sm"
-            />
+            <div>
+              <ProductGallery
+                name={product.name}
+                images={productImages}
+                division={product.division}
+                priority
+              />
+
+              <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+                <dl className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+                  <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+                    <dt className="text-xs font-semibold uppercase text-slate-500">Partner</dt>
+                    <dd className="mt-1 font-semibold text-slate-950">{product.partner}</dd>
+                  </div>
+                  <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+                    <dt className="text-xs font-semibold uppercase text-slate-500">Division</dt>
+                    <dd className="mt-1 font-semibold text-slate-950">
+                      {getDivisionLabel(product.division)}
+                    </dd>
+                  </div>
+                </dl>
+
+                <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+                  <p className="text-xs font-semibold uppercase text-slate-500">Catalogue</p>
+                  <div className="mt-3">
+                    <ProductBrochureModal
+                      productId={product.id}
+                      productName={product.name}
+                      brochure={product.brochure ?? ''}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <div>
               <p className="text-sm font-bold text-[var(--color-primary)]">
@@ -88,119 +126,17 @@ export default async function ProductSinglePage({ params }: Props) {
               <h1 className="mt-4 text-4xl font-bold leading-tight text-slate-950 md:text-5xl">
                 {product.name}
               </h1>
-              <p className="mt-5 text-lg leading-8 text-slate-600">{product.description}</p>
+              <RichText
+                content={product.description}
+                className="mt-5 text-lg leading-8 text-slate-600"
+              />
 
-              <dl className="mt-8 grid gap-4 sm:grid-cols-2">
-                <div className="rounded-lg border border-slate-200 bg-white p-4">
-                  <dt className="text-xs font-semibold uppercase text-slate-500">Partner</dt>
-                  <dd className="mt-1 font-semibold text-slate-950">{product.partner}</dd>
-                </div>
-                <div className="rounded-lg border border-slate-200 bg-white p-4">
-                  <dt className="text-xs font-semibold uppercase text-slate-500">Division</dt>
-                  <dd className="mt-1 font-semibold text-slate-950">
-                    {getDivisionLabel(product.division)}
-                  </dd>
-                </div>
-              </dl>
-
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center justify-center rounded-lg bg-[var(--color-primary)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--color-accent)]"
-                >
-                  Request product consultation
-                </Link>
-                <Link
-                  href="/service-network"
-                  className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-100"
-                >
-                  Service support
-                </Link>
-              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-16">
-        <div className="container-xl">
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px]">
-            <div>
-              <h2 className="text-3xl font-bold text-slate-950">How WTC Nepal supports this product</h2>
-              <div className="mt-8 grid gap-4 md:grid-cols-3">
-                {[
-                  'Product consultation and configuration guidance',
-                  'Installation coordination and operator training',
-                  'Preventive maintenance and technical service support',
-                ].map((item) => (
-                  <div key={item} className="rounded-lg border border-slate-200 bg-white p-5">
-                    <CheckCircle2 className="h-5 w-5 text-[var(--color-primary)]" />
-                    <p className="mt-4 text-sm font-medium leading-6 text-slate-700">{item}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {division && (
-              <aside className="rounded-lg border border-slate-200 bg-slate-50 p-6">
-                <p className="text-sm font-semibold text-[var(--color-primary)]">Division overview</p>
-                <h3 className="mt-2 text-2xl font-bold text-slate-950">{division.name}</h3>
-                <p className="mt-3 text-sm leading-6 text-slate-600">{division.description}</p>
-                <Link
-                  href={`/divisions/${division.id}`}
-                  className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-primary)] hover:text-[var(--color-accent)]"
-                >
-                  Explore division
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </aside>
-            )}
-          </div>
-        </div>
-      </section>
-
-      {relatedProducts.length > 0 && (
-        <section className="bg-slate-50 py-16">
-          <div className="container-xl">
-            <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-              <div>
-                <p className="text-sm font-semibold text-[var(--color-primary)]">Related products</p>
-                <h2 className="mt-2 text-3xl font-bold text-slate-950">
-                  More in {getDivisionLabel(product.division)}
-                </h2>
-              </div>
-              <Link
-                href="/products"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-primary)] hover:text-[var(--color-accent)]"
-              >
-                Browse all products
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-
-            <div className="mt-8 grid gap-6 md:grid-cols-3">
-              {relatedProducts.map((item) => (
-                <Link
-                  key={item.id}
-                  href={`/products/${item.id}`}
-                  className="group rounded-lg border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
-                >
-                  <ProductArtwork
-                    name={item.name}
-                    image={item.image}
-                    division={item.division}
-                    className="aspect-[4/3] rounded-md"
-                  />
-                  <h3 className="mt-4 font-bold text-slate-950 transition group-hover:text-[var(--color-primary)]">
-                    {item.name}
-                  </h3>
-                  <p className="mt-2 text-sm text-slate-500">{item.partner}</p>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+      <RelevantProductsSlider products={relatedProducts} />
 
       <script
         type="application/ld+json"

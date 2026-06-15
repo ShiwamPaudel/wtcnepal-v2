@@ -9,6 +9,8 @@ export const metadata: Metadata = constructMetadata({
   path: '/divisions/diagnostics',
 });
 
+export const dynamic = 'force-dynamic';
+
 export default function DiagnosticsPage() {
   return <DivisionDetailPage divisionId="diagnostics" />;
 }

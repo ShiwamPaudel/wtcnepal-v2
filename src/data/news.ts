@@ -11,6 +11,7 @@ export interface NewsArticle {
   division: 'diagnostics' | 'disinfection' | 'care' | 'general';
   image: string;
   author: string;
+  contentImages?: string;
 }
 
 export const newsArticles = newsContent.newsArticles as NewsArticle[];

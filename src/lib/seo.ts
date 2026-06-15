@@ -54,6 +54,15 @@ export function constructMetadata({
     description,
     keywords: siteConfig.keywords,
     applicationName: siteConfig.name,
+    icons: {
+      icon: [
+        { url: '/images/favicon-wtc.png', type: 'image/png' },
+      ],
+      shortcut: ['/images/favicon-wtc.png'],
+      apple: [
+        { url: '/images/favicon-wtc.png', type: 'image/png' },
+      ],
+    },
     authors: [{ name: siteConfig.legalName, url: siteConfig.url }],
     creator: siteConfig.legalName,
     publisher: siteConfig.legalName,

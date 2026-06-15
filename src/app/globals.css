@@ -2,18 +2,26 @@
 @import "tailwindcss";
 
 :root {
-  --color-primary: #0000cc;
+  --color-primary: #174cff;
   --color-secondary: #ffffff;
   --color-diagnostics: #004aad;
-  --color-disinfection: #0f8f61;
-  --color-care: #0284c7;
+  --color-disinfection: #ffbd59;
+  --color-care: #38b6ff;
   --color-accent: #38b6ff;
   --color-gray-soft: #f5f7fa;
-  --color-navy: #0d2b4e;
-  --color-text: #182033;
+  --color-navy: #07111f;
+  --color-text: #111827;
   --color-muted: #4a5568;
   --shadow-card: 0 10px 30px rgba(15, 23, 42, 0.08);
   --font-poppins: 'Poppins', sans-serif;
+}
+
+.admin-input {
+  @apply mt-2 h-11 w-full rounded-lg border border-slate-300 px-3 text-sm outline-none transition focus:border-[var(--color-primary)] focus:ring-4 focus:ring-blue-100;
+}
+
+.admin-textarea {
+  @apply mt-2 w-full resize-y rounded-lg border border-slate-300 px-3 py-3 text-sm outline-none transition focus:border-[var(--color-primary)] focus:ring-4 focus:ring-blue-100;
 }
 
 @theme inline {
@@ -43,7 +51,10 @@ html {
 
 body {
   margin: 0;
-  background: #ffffff;
+  background:
+    radial-gradient(circle at top left, rgba(56, 182, 255, 0.14), transparent 34rem),
+    radial-gradient(circle at top right, rgba(255, 190, 92, 0.12), transparent 30rem),
+    #ffffff;
   color: var(--color-text);
   font-family: var(--font-poppins);
   font-size: 16px;
@@ -152,6 +163,13 @@ h4 {
 .card {
   border-radius: 8px;
   box-shadow: var(--shadow-card);
+}
+
+.modern-surface {
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(226, 232, 240, 0.86);
+  box-shadow: 0 22px 70px rgba(15, 23, 42, 0.1);
+  backdrop-filter: blur(18px);
 }
 
 .bg-alt {

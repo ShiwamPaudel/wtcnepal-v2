@@ -4,11 +4,11 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { ArrowLeft, ArrowRight, ExternalLink } from 'lucide-react';
 import { getPartnerById, partners } from '@/data/partners';
-import { products } from '@/data/products';
 import { ProductArtwork } from '@/components/ui/ProductArtwork';
 import { getDivisionLabel, getPartnerProducts } from '@/lib/content';
 import { constructMetadata, siteConfig } from '@/lib/seo';
 import { getBreadcrumbSchema } from '@/lib/structured-data';
+import { getProducts } from '@/lib/server-content';
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -47,6 +47,7 @@ export default async function PartnerPage({ params }: Props) {
     notFound();
   }
 
+  const products = await getProducts();
   const partnerProducts = getPartnerProducts(partner, products);
   const jsonLd = getBreadcrumbSchema([
     { name: 'Home', item: '/' },
@@ -84,10 +85,6 @@ export default async function PartnerPage({ params }: Props) {
               </p>
               <h1 className="mt-4 text-4xl font-bold text-slate-950 md:text-5xl">{partner.name}</h1>
               <p className="mt-2 text-sm font-medium text-slate-500">{partner.country}</p>
-              <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">
-                {partner.description}
-              </p>
-
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 {partner.website !== '#' && (
                   <a
@@ -100,12 +97,6 @@ export default async function PartnerPage({ params }: Props) {
                     <ExternalLink className="h-4 w-4" />
                   </a>
                 )}
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-100"
-                >
-                  Ask about this partner
-                </Link>
               </div>
             </div>
           </div>
@@ -127,7 +118,7 @@ export default async function PartnerPage({ params }: Props) {
           <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {partnerProducts.length === 0 && (
               <div className="col-span-full rounded-lg border border-dashed border-slate-300 bg-slate-50 p-8 text-center text-slate-600">
-                Products for this partner can be added from the CMS once the final catalogue is ready.
+                Products for this partner can be added to the local product catalogue once the final list is ready.
               </div>
             )}
 

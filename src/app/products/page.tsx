@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { ArrowRight } from 'lucide-react';
 import { ProductBrowser } from '@/components/ProductBrowser';
 import { divisions } from '@/data/divisions';
-import { products } from '@/data/products';
+import { getProducts } from '@/lib/server-content';
 import { constructMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = constructMetadata({
@@ -13,20 +13,21 @@ export const metadata: Metadata = constructMetadata({
   path: '/products',
 });
 
-export default function ProductsPage() {
+export default async function ProductsPage() {
+  const products = await getProducts();
+
   return (
     <main className="min-h-screen bg-white">
       <section className="border-b border-slate-200 bg-white py-20">
         <div className="container-xl">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-end">
             <div className="max-w-4xl">
-              <p className="text-sm font-bold text-[var(--color-primary)]">Our solutions</p>
+              <p className="text-sm font-bold text-[var(--color-primary)]">Our Products & Solutions</p>
               <h1 className="mt-4 max-w-3xl text-4xl font-bold leading-tight text-slate-950 md:text-5xl">
-                Medical equipment and technology for Nepal&apos;s healthcare teams
+                Medical Equipments and Service
               </h1>
               <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">
-                Browse diagnostics, disinfection, and care products backed by WTC Nepal&apos;s
-                application specialists, biomedical engineers, and service network.
+                Browse advanecd technologies and solutions 
               </p>
             </div>
             <div className="rounded-lg border border-slate-200 bg-slate-50 p-6">
@@ -48,32 +49,6 @@ export default function ProductsPage() {
       </section>
 
       <ProductBrowser products={products} divisions={divisions} />
-
-      <section className="bg-slate-50 py-20">
-        <div className="container-xl">
-          <div className="mx-auto max-w-3xl text-center">
-            <h2 className="text-3xl font-bold text-slate-950">Need a custom solution?</h2>
-            <p className="mt-4 text-lg leading-8 text-slate-600">
-              If a product is not listed, WTC Nepal can still help source, install, train, and
-              maintain the right equipment through our partner network.
-            </p>
-            <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center rounded-lg bg-[var(--color-primary)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--color-accent)]"
-              >
-                Request consultation
-              </Link>
-              <Link
-                href="/service-network"
-                className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-100"
-              >
-                View service network
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
     </main>
   );
 }

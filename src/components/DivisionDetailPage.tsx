@@ -4,10 +4,10 @@ import { ArrowRight, CheckCircle2, HeartPulse, Microscope, ShieldCheck } from 'l
 import type { Division } from '@/data/divisions';
 import { divisions } from '@/data/divisions';
 import { partners } from '@/data/partners';
-import { products } from '@/data/products';
 import { ProductArtwork } from '@/components/ui/ProductArtwork';
 import { divisionTheme, getDivisionLabel } from '@/lib/content';
 import { getFAQSchema } from '@/lib/structured-data';
+import { getProducts } from '@/lib/server-content';
 
 const divisionIcons = {
   diagnostics: Microscope,
@@ -19,7 +19,8 @@ interface DivisionDetailPageProps {
   divisionId: Division;
 }
 
-export function DivisionDetailPage({ divisionId }: DivisionDetailPageProps) {
+export async function DivisionDetailPage({ divisionId }: DivisionDetailPageProps) {
+  const products = await getProducts();
   const division = divisions.find((item) => item.id === divisionId)!;
   const Icon = divisionIcons[divisionId];
   const theme = divisionTheme[divisionId];

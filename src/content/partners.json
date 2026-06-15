@@ -6,8 +6,8 @@
       "country": "Italy",
       "image": "/images/Partners/DiaSorin.png",
       "division": "diagnostics",
-      "description": "Advanced clinical chemistry and immunoassay systems for hospital and reference laboratories.",
-      "website": "#"
+      "description": "Leader in Manufacuturing of Molecular Devices, Chemiluminescent Immunoassay Analyzer & Reagents.",
+      "website": "https://int.diasorin.com/en"
     },
     {
       "id": "p2",
@@ -15,8 +15,8 @@
       "country": "Spain",
       "image": "/images/Partners/BioSystems.png",
       "division": "diagnostics",
-      "description": "High-throughput hematology and coagulation analyzers with dependable precision.",
-      "website": "#"
+      "description": "Leader in Manufacture of Quality Biochemistry Analyzers with LED Technology & it's Reagents.",
+      "website": "https://biosystems.global/"
     },
     {
       "id": "p3",
@@ -24,8 +24,8 @@
       "country": "Korea",
       "image": "/images/Partners/iSens.png",
       "division": "diagnostics",
-      "description": "Point-of-care testing and molecular diagnostics platforms for rapid, accurate results.",
-      "website": "#"
+      "description": "Leader in Manufacture of Point-of-care testing and Cartridge-based Electrolyte & HbA1c Testing Devices.",
+      "website": "https://i-sens.com/"
     },
     {
       "id": "p4",
@@ -33,8 +33,8 @@
       "country": "Germany",
       "image": "/images/Partners/eppendorf.png",
       "division": "diagnostics",
-      "description": "Liquid handling, sample handling, and laboratory workflow technology for research and clinical labs.",
-      "website": "#"
+      "description": "Leader in Manufacture of Liquid handling, sample handling, and laboratory workflow Technologies.",
+      "website": "https://www.eppendorf.com/us-en"
     },
     {
       "id": "p5",
@@ -42,8 +42,8 @@
       "country": "Belgium",
       "image": "/images/Partners/Biocartis.png",
       "division": "diagnostics",
-      "description": "Molecular diagnostics technology supporting streamlined oncology and infectious disease workflows.",
-      "website": "#"
+      "description": "Leader in Oncology Testing, Molecular Biomarkers and Oncology Research.",
+      "website": "https://www.biocartis.com/en"
     },
     {
       "id": "p10",

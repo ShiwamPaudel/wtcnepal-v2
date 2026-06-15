@@ -1,11 +1,11 @@
 import { partnerTestimonials, customerTestimonials } from '@/data/testimonials';
-import { products, Product } from '@/data/products';
+import type { Product } from '@/data/products';
 import Image from 'next/image';
 import Link from 'next/link';
+import { HomeBannerSlider } from '@/components/HomeBannerSlider';
 import { SectionWrapper } from '@/components/ui/SectionWrapper';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import { StatCounter } from '@/components/ui/StatCounter';
-import { DivisionCard } from '@/components/ui/DivisionCard';
 import { CTABanner } from '@/components/ui/CTABanner';
 import { ProductArtwork } from '@/components/ui/ProductArtwork';
 import { constructMetadata } from '@/lib/seo';
@@ -13,10 +13,9 @@ import { getOrganizationSchema, getLocalBusinessSchema } from '@/lib/structured-
 import type { Metadata } from 'next';
 
 import { NewsCard } from '@/components/ui/NewsCard';
-import { NepalMap } from '@/components/ui/NepalMap';
 import { divisions } from '@/data/divisions';
-import { newsArticles } from '@/data/news';
 import { partners } from '@/data/partners';
+import { getHomeBanners, getPublishedNewsArticles, getProducts } from '@/lib/server-content';
 import { ShieldCheck, Users, Map as MapIcon, ArrowRight } from 'lucide-react';
 
 function normalizeYouTubeUrl(url: string) {
@@ -40,49 +39,17 @@ export const metadata: Metadata = constructMetadata({
   path: '/',
 });
 
-export default function Home() {
+export default async function Home() {
+  const [products, newsArticles, homeBanners] = await Promise.all([
+    getProducts(),
+    getPublishedNewsArticles(),
+    getHomeBanners(),
+  ]);
   const featuredProducts = products.filter((product) => product.featured).slice(0, 6);
 
   return (
     <>
-      <section className="relative min-h-[90vh] flex items-center bg-[var(--color-navy)] overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <Image
-            src="/home-banners/hb-1.png"
-            alt="WTC Nepal Home Banner"
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-tr from-[var(--color-primary)]/80 to-[var(--color-accent)]/20" />
-        
-        <div className="container-xl relative z-10 py-20 pt-32">
-          <ScrollReveal>
-            <div className="max-w-3xl">
-              <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 backdrop-blur-md px-4 py-1.5 rounded-full text-white font-medium text-sm mb-6">
-                <span className="w-2 h-2 rounded-full bg-[var(--color-accent)] animate-pulse" />
-                Est. 2001 A.D.
-              </div>
-              <h1 className="text-white mb-6 leading-tight">
-                Nepal&apos;s Most Trusted<br />
-                <span className="text-[var(--color-accent)]">Medical Equipment</span> Service Provider
-              </h1>
-              <p className="text-xl text-gray-200 mb-10 max-w-2xl font-light">
-                Three powerful divisions. One trusted name. Serving all 7 provinces with diagnostics, disinfection, and critical care solutions.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <Link href="#divisions" className="bg-[var(--color-accent)] hover:bg-[var(--color-primary)] text-white px-8 py-4 rounded-full font-bold shadow-lg shadow-[var(--color-accent)]/30 hover:scale-105 transition-all">
-                  Explore Our Divisions
-                </Link>
-                <Link href="/contact" className="bg-transparent border-2 border-white/80 hover:bg-white hover:text-[var(--color-primary)] text-white px-8 py-4 rounded-full font-bold transition-all">
-                  Contact Us
-                </Link>
-              </div>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
+      <HomeBannerSlider banners={homeBanners} />
 
       {/* 2. TRUST BAR */}
       <div className="bg-white border-b border-gray-100 py-10 relative z-20 shadow-sm">
@@ -91,32 +58,67 @@ export default function Home() {
             <StatCounter end={15} suffix="+" label="Global Partners" />
             <StatCounter end={7} label="Provinces Covered" />
             <StatCounter end={25} suffix="" label="Years Experience" />
-            <StatCounter end={5} label="Service Stations" />
           </div>
         </div>
       </div>
 
-      {/* 3. THREE DIVISIONS */}
       <SectionWrapper id="divisions" className="py-24">
-        <ScrollReveal>
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-[var(--color-primary)] font-bold tracking-wider uppercase text-sm mb-2 block">Core Business</span>
-            <h2 className="mb-6">Our Three Divisions</h2>
-            <p className="text-gray-600 text-lg">
-              We specialize in three distinct sectors of healthcare supply, offering comprehensive, end-to-end solutions for medical facilities of all sizes.
+        <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,0.92fr)_minmax(420px,1fr)]">
+          <ScrollReveal>
+            <span className="inline-flex rounded-full border border-blue-100 bg-blue-50 px-4 py-2 text-sm font-bold text-[var(--color-primary)]">
+              Divisions we serve
+            </span>
+            <h2 className="mt-6 max-w-2xl text-4xl font-bold text-slate-950 md:text-5xl">
+              OUR CORE FOCUS
+            </h2>
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
+              Web Trading Concern Pvt. Ltd. has been dedicated to serving the Healthcare Sector in Nepal since its establishment in 2001 A.D. We specialize in Diagnostics, Disinfection & Care and are proud to be the core channel partners of over 15 Multinational Companies from around the world.
             </p>
-          </div>
-        </ScrollReveal>
+            <div className="mt-8 grid gap-3 sm:grid-cols-3">
+              {divisions.map((division) => (
+                <Link
+                  key={division.id}
+                  href={`/divisions/${division.id}`}
+                  className="rounded-2xl border border-slate-200 bg-white/80 p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
+                >
+                  <span
+                    className="block h-2 w-12 rounded-full"
+                    style={{ backgroundColor: division.color }}
+                  />
+                  <strong className="mt-4 block text-slate-950">{division.name}</strong>
+                </Link>
+              ))}
+            </div>
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <Link
+                href="/divisions"
+                className="inline-flex items-center justify-center rounded-full bg-slate-950 px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--color-primary)]"
+              >
+                Explore divisions
+              </Link>
+              <Link
+                href="/products"
+                className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-[var(--color-primary)] hover:text-[var(--color-primary)]"
+              >
+                View Our Products
+              </Link>
+            </div>
+          </ScrollReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {divisions.map((division, idx) => (
-            <ScrollReveal key={division.id} delay={idx * 0.1}>
-              <DivisionCard division={division} />
-              <div className="mt-2 text-center">
-                <a href={`/divisions/${division.id}/categories`} className="text-[var(--color-accent)] font-medium hover:underline">View Categories & Partners &rarr;</a>
-              </div>
-            </ScrollReveal>
-          ))}
+          <ScrollReveal direction="left">
+            <div className="relative">
+              <div className="absolute -inset-8 -z-10 rounded-[48px] bg-gradient-to-br from-blue-50 via-sky-50 to-amber-50 blur-2xl" />
+              <Image
+                src="/images/WTC - Infographics 3 Divisions.gif"
+                alt="WTC divisions infographic"
+                width={760}
+                height={660}
+                className="w-full object-contain drop-shadow-[0_25px_55px_rgba(15,23,42,0.16)]"
+                priority
+                unoptimized
+              />
+            </div>
+          </ScrollReveal>
         </div>
       </SectionWrapper>
 
@@ -202,13 +204,13 @@ export default function Home() {
         <div className="relative overflow-hidden">
           <div className="animate-marquee min-w-[200%] flex items-center gap-10 py-6 px-6">
             {[...partners.slice(0, 14), ...partners.slice(0, 14)].map((partner, index) => (
-              <div key={`${partner.id}-${index}`} className="min-w-[14rem] flex items-center justify-center px-6 py-4 rounded-[32px] transition-transform duration-300 hover:scale-105">
+              <div key={`${partner.id}-${index}`} className="min-w-[16rem] flex items-center justify-center px-6 py-4 rounded-[32px] transition-transform duration-300 hover:scale-105">
                 <Image
                   src={partner.image}
                   alt={partner.name}
-                  width={220}
-                  height={80}
-                  className="max-h-20 max-w-full object-contain"
+                  width={264}
+                  height={96}
+                  className="max-h-24 max-w-full object-contain"
                   loading="lazy"
                   unoptimized
                 />
@@ -408,7 +410,17 @@ export default function Home() {
           </ScrollReveal>
           
           <ScrollReveal delay={0.2} className="lg:col-span-7">
-            <NepalMap />
+            <div className="relative overflow-hidden rounded-lg bg-slate-50 p-6">
+              <Image
+                src="/images/map-of-nepal-wtc-rays.png"
+                alt="WTC Nepal service reach map"
+                width={900}
+                height={640}
+                className="h-auto w-full object-contain"
+                loading="lazy"
+                unoptimized
+              />
+            </div>
           </ScrollReveal>
         </div>
       </SectionWrapper>
@@ -420,7 +432,7 @@ export default function Home() {
             <span className="text-[var(--color-primary)] font-bold tracking-wider uppercase text-sm mb-2 block">Latest Updates</span>
             <h2 className="mb-0">News and Events</h2>
           </ScrollReveal>
-          <Link href="/news" className="hidden md:flex items-center font-bold text-[var(--color-primary)] hover:text-[var(--color-accent)] transition-colors">
+          <Link href="/news-and-events" className="hidden md:flex items-center font-bold text-[var(--color-primary)] hover:text-[var(--color-accent)] transition-colors">
             View All News and Events <ArrowRight className="w-5 h-5 ml-2" />
           </Link>
         </div>
@@ -433,13 +445,13 @@ export default function Home() {
           ))}
         </div>
         <div className="mt-8 text-center md:hidden">
-          <Link href="/news" className="inline-flex items-center font-bold text-[var(--color-primary)] border border-gray-200 px-6 py-3 rounded-full hover:bg-gray-50 transition-colors">
+          <Link href="/news-and-events" className="inline-flex items-center font-bold text-[var(--color-primary)] border border-gray-200 px-6 py-3 rounded-full hover:bg-gray-50 transition-colors">
             View All News and Events <ArrowRight className="w-5 h-5 ml-2" />
           </Link>
         </div>
       </SectionWrapper>
 
-      <section className="py-24 bg-gray-50">
+      {/* <section className="py-24 bg-gray-50">
         <div className="container-xl">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-4xl font-bold mb-6">Stay Updated</h2>
@@ -455,7 +467,7 @@ export default function Home() {
             </Link>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* 10. CTA BANNER */}
       <ScrollReveal direction="none">

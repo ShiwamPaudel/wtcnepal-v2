@@ -105,7 +105,7 @@ export function getArticleSchema(article: NewsArticle) {
         url: absoluteUrl('/images/logo.png'),
       },
     },
-    mainEntityOfPage: absoluteUrl(`/news/${article.slug}`),
+    mainEntityOfPage: absoluteUrl(`/news-and-events/${article.slug}`),
   };
 }
 

@@ -1,7 +1,9 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { ArrowRight, Building2, HeartPulse, ShieldCheck, Users } from 'lucide-react';
+import { ArrowRight, Building2 } from 'lucide-react';
 import { constructMetadata } from '@/lib/seo';
+import { getAboutPageContent } from '@/lib/server-content';
 
 export const metadata: Metadata = constructMetadata({
   title: 'About WTC Nepal | Healthcare Solutions Provider Since 2001',
@@ -10,28 +12,10 @@ export const metadata: Metadata = constructMetadata({
   path: '/about',
 });
 
-const values = [
-  {
-    title: 'Service-led supply',
-    description:
-      'We pair equipment supply with installation, operator training, preventive maintenance, and responsive technical support.',
-    icon: ShieldCheck,
-  },
-  {
-    title: 'Clinical confidence',
-    description:
-      'Our application specialists help healthcare teams adopt technology with practical workflow guidance.',
-    icon: HeartPulse,
-  },
-  {
-    title: 'Nationwide reach',
-    description:
-      'WTC Nepal supports hospitals, clinics, laboratories, and care providers through a growing service network.',
-    icon: Users,
-  },
-];
+export default async function AboutPage() {
+  const aboutContent = await getAboutPageContent();
+  const directorParagraphs = aboutContent.directorMessage.split('\n\n').filter(Boolean);
 
-export default function AboutPage() {
   return (
     <main className="min-h-screen bg-white">
       <section className="border-b border-slate-200 bg-white py-20">
@@ -91,21 +75,26 @@ export default function AboutPage() {
 
       <section className="py-16">
         <div className="container-xl">
-          <div className="grid gap-10 lg:grid-cols-2">
+          <div className="grid gap-6 lg:grid-cols-3">
             <div className="rounded-lg border border-slate-200 bg-white p-8">
               <p className="text-sm font-semibold text-[var(--color-primary)]">Mission</p>
-              <h2 className="mt-3 text-3xl font-bold text-slate-950">Raise equipment reliability</h2>
+              <h2 className="mt-3 text-2xl font-bold text-slate-950">{aboutContent.missionTitle}</h2>
               <p className="mt-4 text-base leading-7 text-slate-600">
-                Our mission is to help healthcare facilities access appropriate medical technology
-                and keep it running through dependable technical support and clear user training.
+                {aboutContent.mission}
               </p>
             </div>
             <div className="rounded-lg border border-slate-200 bg-white p-8">
               <p className="text-sm font-semibold text-[var(--color-primary)]">Vision</p>
-              <h2 className="mt-3 text-3xl font-bold text-slate-950">Be Nepal&apos;s trusted partner</h2>
+              <h2 className="mt-3 text-2xl font-bold text-slate-950">{aboutContent.visionTitle}</h2>
               <p className="mt-4 text-base leading-7 text-slate-600">
-                We aim to be the healthcare technology partner institutions can rely on for product
-                selection, implementation, uptime, and long-term lifecycle support.
+                {aboutContent.vision}
+              </p>
+            </div>
+            <div className="rounded-lg border border-slate-200 bg-white p-8">
+              <p className="text-sm font-semibold text-[var(--color-primary)]">Goals</p>
+              <h2 className="mt-3 text-2xl font-bold text-slate-950">{aboutContent.goalsTitle}</h2>
+              <p className="mt-4 text-base leading-7 text-slate-600">
+                {aboutContent.goals}
               </p>
             </div>
           </div>
@@ -114,28 +103,45 @@ export default function AboutPage() {
 
       <section className="bg-slate-50 py-16">
         <div className="container-xl">
-          <div className="max-w-3xl">
-            <p className="text-sm font-semibold text-[var(--color-primary)]">Our approach</p>
-            <h2 className="mt-3 text-3xl font-bold text-slate-950">A practical partner for critical equipment</h2>
-            <p className="mt-4 text-lg leading-8 text-slate-600">
-              Medical equipment decisions are not just procurement decisions. They affect clinical
-              workflows, service readiness, consumable availability, and patient care continuity.
-              WTC Nepal brings product knowledge and field service experience into the same conversation.
-            </p>
-          </div>
-
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {values.map((value) => {
-              const Icon = value.icon;
-
-              return (
-                <article key={value.title} className="rounded-lg border border-slate-200 bg-white p-6">
-                  <Icon className="h-7 w-7 text-[var(--color-primary)]" />
-                  <h3 className="mt-5 text-xl font-bold text-slate-950">{value.title}</h3>
-                  <p className="mt-3 text-sm leading-6 text-slate-600">{value.description}</p>
-                </article>
-              );
-            })}
+          <div className="grid gap-10 lg:grid-cols-[360px_minmax(0,1fr)] lg:items-center">
+            <div className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
+              {aboutContent.directorImage ? (
+                <Image
+                  src={aboutContent.directorImage}
+                  alt={aboutContent.directorImageAlt || aboutContent.directorName || 'WTC Nepal director'}
+                  width={720}
+                  height={900}
+                  className="aspect-[4/5] w-full object-cover"
+                  unoptimized={aboutContent.directorImage.startsWith('/api/media/')}
+                />
+              ) : (
+                <div className="flex aspect-[4/5] items-center justify-center bg-white p-8">
+                  <Image
+                    src="/images/logo.png"
+                    alt="WTC Nepal"
+                    width={220}
+                    height={86}
+                    className="h-auto w-52 object-contain"
+                  />
+                </div>
+              )}
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-[var(--color-primary)]">Director&apos;s Message</p>
+              <h2 className="mt-3 text-3xl font-bold text-slate-950 md:text-4xl">
+                A message from {aboutContent.directorName || 'our leadership'}
+              </h2>
+              {aboutContent.directorTitle && (
+                <p className="mt-3 text-sm font-semibold uppercase tracking-wide text-slate-500">
+                  {aboutContent.directorTitle}
+                </p>
+              )}
+              <div className="mt-6 space-y-5 text-lg leading-8 text-slate-600">
+                {directorParagraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>

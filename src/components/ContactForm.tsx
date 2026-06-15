@@ -2,43 +2,59 @@
 
 import { useState } from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
-import { CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, Loader2, Send } from 'lucide-react';
 
 export default function ContactForm() {
   const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' });
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [message, setMessage] = useState('');
 
   function handleChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setForm({ ...form, [event.target.name]: event.target.value });
   }
 
-  function handleSubmit(event: FormEvent) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setStatus('submitting');
+    setMessage('');
 
-    const subject = encodeURIComponent(`Website enquiry from ${form.name}`);
-    const body = encodeURIComponent(
-      [
-        `Name: ${form.name}`,
-        `Email: ${form.email}`,
-        `Phone: ${form.phone}`,
-        '',
-        form.message,
-      ].join('\n'),
-    );
+    const formData = new FormData(event.currentTarget);
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: formData.get('name'),
+        email: formData.get('email'),
+        phone: formData.get('phone'),
+        message: formData.get('message'),
+        website: formData.get('website'),
+        sourcePath: window.location.pathname,
+      }),
+    });
+    const result = await response.json();
 
-    window.location.href = `mailto:info@wtcnepal.com?subject=${subject}&body=${body}`;
-    setSubmitted(true);
+    if (response.ok) {
+      setStatus('success');
+      setMessage('Thanks. Your enquiry has been received by WTC Nepal.');
+      setForm({ name: '', email: '', phone: '', message: '' });
+      event.currentTarget.reset();
+      return;
+    }
+
+    setStatus('error');
+    setMessage(result.message ?? 'Could not submit your enquiry. Please try again.');
   }
 
   return (
     <div className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
       <h2 className="text-2xl font-bold text-slate-950">Send us a message</h2>
       <p className="mt-2 text-sm leading-6 text-slate-600">
-        This form opens your email app with the enquiry pre-filled.
+        Share your requirements and the WTC Nepal team will follow up.
       </p>
 
-      {!submitted ? (
+      {status !== 'success' ? (
         <form onSubmit={handleSubmit} className="mt-6 space-y-5">
+          <input name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
           <div className="grid gap-5 md:grid-cols-2">
             <div>
               <label htmlFor="name" className="block text-sm font-semibold text-slate-700">
@@ -106,17 +122,24 @@ export default function ContactForm() {
 
           <button
             type="submit"
-            className="w-full rounded-lg bg-[var(--color-primary)] px-6 py-4 text-sm font-semibold text-white transition hover:bg-[var(--color-accent)]"
+            disabled={status === 'submitting'}
+            className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[var(--color-primary)] px-6 py-4 text-sm font-semibold text-white transition hover:bg-[var(--color-accent)] disabled:bg-slate-300"
           >
-            Open email enquiry
+            {status === 'submitting' ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
+            Send enquiry
           </button>
+          {message && (
+            <p className={`text-sm font-semibold ${status === 'error' ? 'text-red-700' : 'text-emerald-700'}`}>
+              {message}
+            </p>
+          )}
         </form>
       ) : (
         <div className="mt-8 rounded-lg bg-emerald-50 p-6 text-center">
           <CheckCircle2 className="mx-auto h-10 w-10 text-emerald-600" />
-          <h3 className="mt-4 text-xl font-bold text-slate-950">Email draft opened</h3>
+          <h3 className="mt-4 text-xl font-bold text-slate-950">Enquiry received</h3>
           <p className="mt-2 text-sm leading-6 text-slate-600">
-            Please send the prepared email from your mail app so the WTC Nepal team receives it.
+            Thanks. The WTC Nepal team will review your message and follow up.
           </p>
         </div>
       )}

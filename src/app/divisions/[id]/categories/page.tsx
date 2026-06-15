@@ -88,23 +88,29 @@ export default async function DivisionCategoriesPage({ params }: Props) {
               return (
                 <article
                   key={`${category.name}-${category.partner}`}
-                  className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm"
+                  className="group overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:border-blue-100 hover:shadow-lg"
                 >
-                  <div className="flex h-24 items-center justify-center rounded-md bg-slate-50 p-4">
+                  <div className="flex h-36 items-center justify-center bg-slate-50 p-6">
                     {partnerRecord ? (
                       <Image
                         src={partnerRecord.image}
                         alt={partnerRecord.name}
-                        width={160}
-                        height={90}
-                        className="max-h-16 object-contain"
+                        width={210}
+                        height={118}
+                        className="max-h-24 w-auto object-contain transition duration-300 group-hover:scale-105"
                       />
                     ) : (
                       <span className="text-sm font-semibold text-slate-500">{category.partner}</span>
                     )}
                   </div>
-                  <h2 className="mt-5 text-lg font-bold text-slate-950">{category.name}</h2>
-                  <p className="mt-2 text-sm text-slate-500">{category.partner}</p>
+                  <div className="p-5">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-primary)]">
+                      {category.partner}
+                    </p>
+                    <h2 className="mt-2 text-base font-bold leading-6 text-slate-950">
+                      {category.name}
+                    </h2>
+                  </div>
                 </article>
               );
             })}

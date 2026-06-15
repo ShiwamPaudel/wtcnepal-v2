@@ -64,10 +64,10 @@ export function ProductBrowser({ products, divisions }: ProductBrowserProps) {
         <div className="container-xl">
           <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-xl">
-              <p className="text-sm font-semibold text-[var(--color-primary)]">Product finder</p>
-              <h2 className="mt-2 text-2xl font-bold text-slate-950">Search the WTC Nepal catalogue</h2>
+              <p className="text-sm font-semibold text-[var(--color-primary)]"></p>
+              <h2 className="mt-2 text-2xl font-bold text-slate-950"></h2>
               <p className="mt-2 text-sm text-slate-600">
-                Filter by division, partner, product name, or equipment category.
+                
               </p>
             </div>
 
