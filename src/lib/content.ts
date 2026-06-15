@@ -63,7 +63,7 @@ export function getPartnerProducts(partner: Partner, products: Product[]): Produ
 }
 
 export function getSearchableProductText(product: Product): string {
-  return [product.name, product.partner, product.description, getDivisionLabel(product.division)]
+  return [product.name, product.partner, product.category, product.description, getDivisionLabel(product.division)]
     .join(' ')
     .toLowerCase();
 }

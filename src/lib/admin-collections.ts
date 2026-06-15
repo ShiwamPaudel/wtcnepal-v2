@@ -80,6 +80,7 @@ export function emptyCmsItem(collection: CmsCollection) {
       id: '',
       name: '',
       division: 'diagnostics',
+      category: '',
       partner: '',
       description: '',
       image: '',

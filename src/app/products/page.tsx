@@ -13,7 +13,12 @@ export const metadata: Metadata = constructMetadata({
   path: '/products',
 });
 
-export default async function ProductsPage() {
+type ProductsPageProps = {
+  searchParams: Promise<{ division?: string; category?: string; partner?: string; q?: string }>;
+};
+
+export default async function ProductsPage({ searchParams }: ProductsPageProps) {
+  const filters = await searchParams;
   const products = await getProducts();
 
   return (
@@ -48,7 +53,14 @@ export default async function ProductsPage() {
         </div>
       </section>
 
-      <ProductBrowser products={products} divisions={divisions} />
+      <ProductBrowser
+        products={products}
+        divisions={divisions}
+        initialDivision={filters.division}
+        initialCategory={filters.category}
+        initialPartner={filters.partner}
+        initialQuery={filters.q}
+      />
     </main>
   );
 }

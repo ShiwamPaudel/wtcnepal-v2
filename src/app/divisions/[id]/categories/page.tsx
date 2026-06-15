@@ -64,7 +64,7 @@ export default async function DivisionCategoriesPage({ params }: Props) {
             Back to divisions
           </Link>
           <p className="mt-8 text-sm font-bold text-[var(--color-primary)]">Categories</p>
-          <h1 className="mt-4 text-4xl font-bold text-slate-950 md:text-5xl">
+          <h1 className="mt-4 text-3xl font-bold text-slate-950 md:text-4xl">
             {division.name} categories and partner brands
           </h1>
           <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">
@@ -86,8 +86,9 @@ export default async function DivisionCategoriesPage({ params }: Props) {
               });
 
               return (
-                <article
+                <Link
                   key={`${category.name}-${category.partner}`}
+                  href={`/products?division=${division.id}&category=${encodeURIComponent(category.name)}`}
                   className="group overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:border-blue-100 hover:shadow-lg"
                 >
                   <div className="flex h-36 items-center justify-center bg-slate-50 p-6">
@@ -107,11 +108,11 @@ export default async function DivisionCategoriesPage({ params }: Props) {
                     <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-primary)]">
                       {category.partner}
                     </p>
-                    <h2 className="mt-2 text-base font-bold leading-6 text-slate-950">
+                    <h2 className="mt-2 text-sm font-bold leading-5 text-slate-950 md:text-[15px]">
                       {category.name}
                     </h2>
                   </div>
-                </article>
+                </Link>
               );
             })}
           </div>

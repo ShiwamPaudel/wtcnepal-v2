@@ -17,6 +17,7 @@ import {
   divisionTheme,
   getDivisionLabel,
   getSearchableProductText,
+  normalizeText,
 } from '@/lib/content';
 import { ProductArtwork } from '@/components/ui/ProductArtwork';
 
@@ -25,13 +26,35 @@ type ViewMode = 'grid' | 'list';
 interface ProductBrowserProps {
   products: Product[];
   divisions: DivisionInfo[];
+  initialDivision?: string;
+  initialCategory?: string;
+  initialPartner?: string;
+  initialQuery?: string;
 }
 
-export function ProductBrowser({ products, divisions }: ProductBrowserProps) {
-  const [query, setQuery] = useState('');
-  const [division, setDivision] = useState('all');
-  const [partner, setPartner] = useState('all');
+export function ProductBrowser({
+  products,
+  divisions,
+  initialDivision,
+  initialCategory,
+  initialPartner,
+  initialQuery,
+}: ProductBrowserProps) {
+  const normalizedInitialDivision = divisions.some((item) => item.id === initialDivision) ? initialDivision! : 'all';
+  const [query, setQuery] = useState(initialQuery ?? '');
+  const [division, setDivision] = useState(normalizedInitialDivision);
+  const [category, setCategory] = useState(initialCategory ?? 'all');
+  const [partner, setPartner] = useState(initialPartner ?? 'all');
   const [viewMode, setViewMode] = useState<ViewMode>('grid');
+
+  const categoryOptions = useMemo(() => {
+    const divisionCategories =
+      division === 'all'
+        ? divisions.flatMap((item) => item.categories ?? [])
+        : divisions.find((item) => item.id === division)?.categories ?? [];
+
+    return Array.from(new Set(divisionCategories.map((item) => item.name))).sort();
+  }, [division, divisions]);
 
   const partnerOptions = useMemo(
     () => Array.from(new Set(products.map((product) => product.partner))).sort(),
@@ -47,14 +70,21 @@ export function ProductBrowser({ products, divisions }: ProductBrowserProps) {
         getSearchableProductText(product).includes(normalizedQuery);
       const matchesDivision = division === 'all' || product.division === division;
       const matchesPartner = partner === 'all' || product.partner === partner;
+      const matchesCategory =
+        category === 'all' ||
+        normalizeText(product.category ?? '') === normalizeText(category) ||
+        (!product.category &&
+          (normalizeText(product.name).includes(normalizeText(category)) ||
+            normalizeText(product.description).includes(normalizeText(category))));
 
-      return matchesQuery && matchesDivision && matchesPartner;
+      return matchesQuery && matchesDivision && matchesPartner && matchesCategory;
     });
-  }, [division, partner, products, query]);
+  }, [category, division, partner, products, query]);
 
   const resetFilters = () => {
     setQuery('');
     setDivision('all');
+    setCategory('all');
     setPartner('all');
   };
 
@@ -101,7 +131,7 @@ export function ProductBrowser({ products, divisions }: ProductBrowserProps) {
             </div>
           </div>
 
-          <div className="mt-8 grid gap-4 lg:grid-cols-[minmax(0,1fr)_220px_220px_auto]">
+          <div className="mt-8 grid gap-4 lg:grid-cols-[minmax(0,1fr)_190px_240px_190px_auto]">
             <label className="relative block">
               <span className="sr-only">Search products</span>
               <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
@@ -118,13 +148,32 @@ export function ProductBrowser({ products, divisions }: ProductBrowserProps) {
               <span className="sr-only">Division</span>
               <select
                 value={division}
-                onChange={(event) => setDivision(event.target.value)}
+                onChange={(event) => {
+                  setDivision(event.target.value);
+                  setCategory('all');
+                }}
                 className="h-12 w-full rounded-lg border border-slate-300 bg-white px-4 text-sm outline-none transition focus:border-[var(--color-primary)] focus:ring-4 focus:ring-blue-100"
               >
                 <option value="all">All divisions</option>
                 {divisions.map((item) => (
                   <option key={item.id} value={item.id}>
                     {item.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label>
+              <span className="sr-only">Category</span>
+              <select
+                value={categoryOptions.includes(category) ? category : 'all'}
+                onChange={(event) => setCategory(event.target.value)}
+                className="h-12 w-full rounded-lg border border-slate-300 bg-white px-4 text-sm outline-none transition focus:border-[var(--color-primary)] focus:ring-4 focus:ring-blue-100"
+              >
+                <option value="all">All categories</option>
+                {categoryOptions.map((item) => (
+                  <option key={item} value={item}>
+                    {item}
                   </option>
                 ))}
               </select>
@@ -165,6 +214,9 @@ export function ProductBrowser({ products, divisions }: ProductBrowserProps) {
               <span className="rounded-full bg-white px-3 py-1 ring-1 ring-slate-200">
                 {getDivisionLabel(division as Product['division'])}
               </span>
+            )}
+            {category !== 'all' && (
+              <span className="rounded-full bg-white px-3 py-1 ring-1 ring-slate-200">{category}</span>
             )}
             {partner !== 'all' && (
               <span className="rounded-full bg-white px-3 py-1 ring-1 ring-slate-200">{partner}</span>
@@ -227,6 +279,7 @@ function ProductResultCard({ product, viewMode }: { product: Product; viewMode: 
             {product.name}
           </h3>
           <p className="mt-1 text-sm font-medium text-slate-500">{product.partner}</p>
+          {product.category && <p className="mt-1 text-xs font-semibold text-slate-400">{product.category}</p>}
           <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600">{product.description}</p>
         </div>
         <Link
@@ -255,6 +308,7 @@ function ProductResultCard({ product, viewMode }: { product: Product; viewMode: 
           </span>
           <span className="text-xs font-medium text-slate-500">{product.partner}</span>
         </div>
+        {product.category && <p className="mt-3 text-xs font-semibold text-slate-400">{product.category}</p>}
         <h3 className="mt-4 text-xl font-bold leading-snug text-slate-950 transition group-hover:text-[var(--color-primary)]">
           {product.name}
         </h3>

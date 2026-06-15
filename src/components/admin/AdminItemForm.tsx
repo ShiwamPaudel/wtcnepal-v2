@@ -5,6 +5,7 @@ import type { FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { Loader2, Save } from 'lucide-react';
 import type { CmsCollection } from '@/lib/cms';
+import { divisions } from '@/data/divisions';
 
 type Editable = Record<string, unknown>;
 
@@ -234,10 +235,51 @@ export function AdminItemForm({
 }
 
 function ProductFields({ item }: { item: Editable }) {
+  const initialDivision = asString(item.division) || 'diagnostics';
+  const [selectedDivision, setSelectedDivision] = useState(initialDivision);
+  const [selectedCategory, setSelectedCategory] = useState(asString(item.category));
+  const categoryOptions = divisions.find((division) => division.id === selectedDivision)?.categories ?? [];
+
   return (
     <>
       <Field name="name" label="Product name" value={item.name} required />
-      <Select name="division" label="Division" value={item.division} options={['diagnostics', 'disinfection', 'care']} />
+      <label className="block">
+        <span className="text-sm font-semibold text-slate-700">Division</span>
+        <select
+          name="division"
+          value={selectedDivision}
+          onChange={(event) => {
+            setSelectedDivision(event.target.value);
+            setSelectedCategory('');
+          }}
+          className="admin-input bg-white"
+        >
+          {divisions.map((division) => (
+            <option key={division.id} value={division.id}>
+              {division.name}
+            </option>
+          ))}
+        </select>
+      </label>
+      <label className="block">
+        <span className="text-sm font-semibold text-slate-700">Category</span>
+        <select
+          name="category"
+          value={selectedCategory}
+          onChange={(event) => setSelectedCategory(event.target.value)}
+          className="admin-input bg-white"
+        >
+          <option value="">Select a category</option>
+          {categoryOptions.map((category) => (
+            <option key={`${category.name}-${category.partner}`} value={category.name}>
+              {category.name}
+            </option>
+          ))}
+        </select>
+        <span className="mt-1 block text-xs text-slate-500">
+          Categories update automatically when the product division changes.
+        </span>
+      </label>
       <Field name="partner" label="Partner" value={item.partner} required />
       <Textarea
         name="description"
