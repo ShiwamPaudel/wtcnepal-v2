@@ -44,7 +44,7 @@ export const divisions: DivisionInfo[] = [
       'Molecular Diagnostic System for Oncology',
     ],
     categories: [
-      { name: 'Biochemistry Analyzer & Reagents', partner: 'BioSystems S.A' },
+      { name: 'Biochemistry Analyzer & Reagents', partner: 'BioSystems' },
       { name: 'Immunofluorescence (IFA)', partner: 'BioSystems' },
       { name: 'Chemiluminescence Immunoassay Analyzers (CLIA)', partner: 'Diasorin' },
       { name: 'Hematology Analyzer & Reagents', partner: 'Nihon Kohden' },
@@ -168,10 +168,11 @@ export const divisions: DivisionInfo[] = [
       ],
     categories: [
       { name: 'Ventilator systems', partner: 'Nihon Kohden' },
-      { name: 'Non-invasive neuromodulation systems', partner: 'Nesa World' },
-      { name: 'High laser systems', partner: 'Asclepion' },
-      { name: 'Fractional CO2 laser', partner: 'Bison' },
-      { name: 'Dermatology setup and accessories', partner: 'DermaIndia' },
+      { name: 'Arterial Blood Gas (ABG) Analyzers', partner: 'i-SENS' },
+      { name: 'Non-Invasive Neuromodulation Technology', partner: 'Nesa World' },
+      { name: 'Diode, Q-Switched Nd:YAG, ER:YAG & Pico/Nano Seconds Laser', partner: 'Asclepion' },
+      { name: 'Fractional CO2 Laser', partner: 'Bison' },
+      { name: 'Dermatology Instruments, Units & Accessories', partner: 'DermaIndia' },
     ],
     benefits: [
       {
