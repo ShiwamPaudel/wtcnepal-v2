@@ -44,6 +44,8 @@ function serialize(collection: CmsCollection, formData: FormData) {
     return {
       ...base,
       images,
+      sortOrder: Number(base.sortOrder || 0),
+      categorySortOrder: Number(base.categorySortOrder || 0),
       featured: formData.get('featured') === 'on',
       published: formData.get('published') === 'on',
     };
@@ -281,6 +283,22 @@ function ProductFields({ item }: { item: Editable }) {
         </span>
       </label>
       <Field name="partner" label="Partner" value={item.partner} required />
+      <div className="grid gap-5 md:grid-cols-2">
+        <Field
+          name="sortOrder"
+          label="Product page order"
+          value={item.sortOrder ?? 0}
+          type="number"
+          helper="Lower numbers appear first on /products and general product sections."
+        />
+        <Field
+          name="categorySortOrder"
+          label="Category order"
+          value={item.categorySortOrder ?? 0}
+          type="number"
+          helper="Lower numbers appear first when a product category is selected."
+        />
+      </div>
       <Textarea
         name="description"
         label="Description"
@@ -385,7 +403,7 @@ function NewsFields({ item }: { item: Editable }) {
         emptyLabel="No image"
         helper="Upload the news image here. The CMS uses it on news pages automatically."
       />
-      <Field name="author" label="Author" value={item.author ?? 'WTC Nepal Editorial Team'} />
+      <Field name="author" label="Author" value={item.author ?? 'Web Trading Concern Pvt. Ltd. Editorial Team'} />
     </>
   );
 }

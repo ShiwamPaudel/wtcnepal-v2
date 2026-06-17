@@ -50,7 +50,7 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error('Brochure request failed', error);
     return NextResponse.json(
-      { message: 'Could not send your brochure request. Please contact WTC Nepal directly.' },
+      { message: 'Could not send your brochure request. Please contact Web Trading Concern Pvt. Ltd. directly.' },
       { status: 500 },
     );
   }

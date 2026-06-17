@@ -35,7 +35,7 @@ export default function ContactForm() {
 
     if (response.ok) {
       setStatus('success');
-      setMessage('Thanks. Your enquiry has been received by WTC Nepal.');
+      setMessage('Thanks. Your enquiry has been received by Web Trading Concern Pvt. Ltd..');
       setForm({ name: '', email: '', phone: '', message: '' });
       event.currentTarget.reset();
       return;
@@ -49,7 +49,7 @@ export default function ContactForm() {
     <div className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
       <h2 className="text-2xl font-bold text-slate-950">Send us a message</h2>
       <p className="mt-2 text-sm leading-6 text-slate-600">
-        Share your requirements and the WTC Nepal team will follow up.
+        Share your requirements and the Web Trading Concern Pvt. Ltd. team will follow up.
       </p>
 
       {status !== 'success' ? (
@@ -139,7 +139,7 @@ export default function ContactForm() {
           <CheckCircle2 className="mx-auto h-10 w-10 text-emerald-600" />
           <h3 className="mt-4 text-xl font-bold text-slate-950">Enquiry received</h3>
           <p className="mt-2 text-sm leading-6 text-slate-600">
-            Thanks. The WTC Nepal team will review your message and follow up.
+            Thanks. The Web Trading Concern Pvt. Ltd. team will review your message and follow up.
           </p>
         </div>
       )}

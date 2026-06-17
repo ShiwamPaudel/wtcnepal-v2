@@ -67,3 +67,36 @@ export function getSearchableProductText(product: Product): string {
     .join(' ')
     .toLowerCase();
 }
+
+function numericSortValue(value: unknown) {
+  const number = Number(value);
+  return Number.isFinite(number) ? number : Number.MAX_SAFE_INTEGER;
+}
+
+export function compareProductsForDisplay(
+  first: Product,
+  second: Product,
+  options: { categoryMode?: boolean } = {},
+) {
+  const firstPrimary = options.categoryMode
+    ? numericSortValue(first.categorySortOrder)
+    : numericSortValue(first.sortOrder);
+  const secondPrimary = options.categoryMode
+    ? numericSortValue(second.categorySortOrder)
+    : numericSortValue(second.sortOrder);
+
+  if (firstPrimary !== secondPrimary) return firstPrimary - secondPrimary;
+
+  const firstFallback = numericSortValue(first.sortOrder);
+  const secondFallback = numericSortValue(second.sortOrder);
+  if (firstFallback !== secondFallback) return firstFallback - secondFallback;
+
+  return 0;
+}
+
+export function sortProductsForDisplay(
+  products: Product[],
+  options: { categoryMode?: boolean } = {},
+) {
+  return [...products].sort((first, second) => compareProductsForDisplay(first, second, options));
+}

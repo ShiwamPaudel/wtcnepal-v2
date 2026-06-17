@@ -25,15 +25,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!partner) {
     return constructMetadata({
       title: 'Partner Not Found',
-      description: 'The requested WTC Nepal partner could not be found.',
+      description: 'The requested Web Trading Concern Pvt. Ltd. partner could not be found.',
       path: `/partners/${id}`,
       noIndex: true,
     });
   }
 
   return constructMetadata({
-    title: `${partner.name} | WTC Nepal Partner`,
-    description: `${partner.description} Learn about ${partner.name} products and WTC Nepal support in Nepal.`,
+    title: `${partner.name} | Web Trading Concern Pvt. Ltd. Partner`,
+    description: `${partner.description} Learn about ${partner.name} products and Web Trading Concern Pvt. Ltd. support in Nepal.`,
     image: partner.image || siteConfig.ogImage,
     path: `/partners/${partner.id}`,
   });

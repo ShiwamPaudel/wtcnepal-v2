@@ -47,7 +47,7 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error('Contact enquiry failed', error);
     return NextResponse.json(
-      { message: 'Could not send your enquiry. Please contact WTC Nepal directly.' },
+      { message: 'Could not send your enquiry. Please contact Web Trading Concern Pvt. Ltd. directly.' },
       { status: 500 },
     );
   }

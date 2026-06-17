@@ -1,11 +1,12 @@
 import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 import { divisions } from '@/data/divisions';
 import { constructMetadata } from '@/lib/seo';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = constructMetadata({
   title: 'Healthcare Divisions | Diagnostics, Disinfection & Care Solutions',
-  description: 'Explore WTC Nepal\'s three core divisions: Diagnostics, Disinfection, and Care. Discover our comprehensive healthcare solutions and medical equipment services across Nepal.',
+  description: 'Explore Web Trading Concern Pvt. Ltd.\'s three core divisions: Diagnostics, Disinfection, and Care. Discover our comprehensive healthcare solutions and medical equipment services across Nepal.',
   path: '/divisions',
 });
 
@@ -17,7 +18,7 @@ export default function DivisionsPage() {
           <p className="text-sm font-bold text-[var(--color-primary)]">Healthcare divisions</p>
           <h1 className="mt-4 text-4xl font-bold text-slate-950 md:text-5xl">Our divisions</h1>
           <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">
-            WTC Nepal organizes its portfolio around diagnostics, disinfection, and care so
+            Web Trading Concern Pvt. Ltd. organizes its portfolio around diagnostics, disinfection, and care so
             healthcare providers can quickly find the right product and support team.
           </p>
         </div>
@@ -43,15 +44,11 @@ export default function DivisionsPage() {
                 <div className="mt-6 flex flex-col gap-3">
                   <Link
                     href={`/divisions/${division.id}`}
-                    className="text-sm font-semibold text-[var(--color-primary)] hover:text-[var(--color-accent)]"
+                    className="inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                    style={{ backgroundColor: division.color }}
                   >
                     Explore division
-                  </Link>
-                  <Link
-                    href={`/divisions/${division.id}/categories`}
-                    className="text-sm font-semibold text-slate-600 hover:text-[var(--color-primary)]"
-                  >
-                    View categories and partners
+                    <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
               </article>

@@ -13,9 +13,11 @@ import {
   getPublishedProducts,
   getPublishedTeam as getCmsPublishedTeam,
 } from '@/lib/cms';
+import { sortProductsForDisplay } from '@/lib/content';
 
 export async function getProducts(): Promise<Product[]> {
-  return getPublishedProducts();
+  const products = await getPublishedProducts();
+  return sortProductsForDisplay(products);
 }
 
 export async function getProductById(id: string): Promise<Product | undefined> {

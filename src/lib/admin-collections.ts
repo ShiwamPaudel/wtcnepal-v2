@@ -86,6 +86,8 @@ export function emptyCmsItem(collection: CmsCollection) {
       image: '',
       images: [],
       brochure: '',
+      sortOrder: 0,
+      categorySortOrder: 0,
       featured: false,
       published: true,
     };
@@ -102,7 +104,7 @@ export function emptyCmsItem(collection: CmsCollection) {
       readingTime: 4,
       division: 'general',
       image: '',
-      author: 'WTC Nepal Editorial Team',
+      author: 'Web Trading Concern Pvt. Ltd. Editorial Team',
       published: true,
     };
   }
@@ -136,7 +138,7 @@ export function emptyCmsItem(collection: CmsCollection) {
       id: 'team-hero',
       title: 'Team hero photo',
       image: '',
-      alt: 'WTC Nepal team',
+      alt: 'Web Trading Concern Pvt. Ltd. team',
       published: true,
     };
   }
@@ -154,7 +156,7 @@ export function emptyCmsItem(collection: CmsCollection) {
       directorTitle: '',
       directorMessage: '',
       directorImage: '',
-      directorImageAlt: 'WTC Nepal director',
+      directorImageAlt: 'Web Trading Concern Pvt. Ltd. director',
       published: true,
     };
   }

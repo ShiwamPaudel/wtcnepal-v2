@@ -9,7 +9,7 @@ import { constructMetadata } from '@/lib/seo';
 export const metadata: Metadata = constructMetadata({
   title: 'Medical Equipment and Healthcare Solutions in Nepal',
   description:
-    'Search WTC Nepal medical equipment by division, partner, and product category. Browse diagnostics, disinfection, and care solutions with nationwide service support.',
+    'Search Web Trading Concern Pvt. Ltd. medical equipment by division, partner, and product category. Browse diagnostics, disinfection, and care solutions with nationwide service support.',
   path: '/products',
 });
 
@@ -32,14 +32,14 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
                 Medical Equipments and Service
               </h1>
               <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">
-                Browse advanecd technologies and solutions 
+                
               </p>
             </div>
             <div className="rounded-lg border border-slate-200 bg-slate-50 p-6">
               <p className="text-sm font-semibold text-slate-950">Need help selecting equipment?</p>
               <p className="mt-2 text-sm leading-6 text-slate-600">
                 Tell us your facility type, expected workload, and service location. Our team can
-                shortlist compatible systems.
+                shortlist compatible systems for you.
               </p>
               <Link
                 href="/contact"

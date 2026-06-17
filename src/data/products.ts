@@ -12,6 +12,8 @@ export interface Product {
   images?: string[];
   featured?: boolean;
   brochure?: string;
+  sortOrder?: number;
+  categorySortOrder?: number;
 }
 
 export const products = productsContent.products as Product[];

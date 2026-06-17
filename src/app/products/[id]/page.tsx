@@ -9,7 +9,7 @@ import { RichText } from '@/components/ui/RichText';
 import type { Product } from '@/data/products';
 import { constructMetadata, siteConfig } from '@/lib/seo';
 import { getBreadcrumbSchema, getProductSchema } from '@/lib/structured-data';
-import { getDivisionLabel, hasUsableImage } from '@/lib/content';
+import { compareProductsForDisplay, getDivisionLabel, hasUsableImage } from '@/lib/content';
 import { getProductById, getProducts } from '@/lib/server-content';
 
 type Props = {
@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!product) {
     return constructMetadata({
       title: 'Product Not Found',
-      description: 'The requested WTC Nepal product could not be found.',
+      description: 'The requested Web Trading Concern Pvt. Ltd. product could not be found.',
       path: `/products/${id}`,
       noIndex: true,
     });
@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return constructMetadata({
     title: `${product.name} | ${getDivisionLabel(product.division)} Equipment`,
-    description: `${product.description} Available through WTC Nepal with consultation, installation, and service support across Nepal.`,
+    description: `${product.description} Available through Web Trading Concern Pvt. Ltd. with consultation, installation, and service support across Nepal.`,
     image: product.image || siteConfig.ogImage,
     path: `/products/${product.id}`,
   });
@@ -59,6 +59,7 @@ export default async function ProductSinglePage({ params }: Props) {
 
   const relatedProducts = products
     .filter((item) => item.id !== product.id && item.division === product.division)
+    .sort(compareProductsForDisplay)
     .slice(0, 10);
   const productImages = getProductImages(product);
 
@@ -83,7 +84,7 @@ export default async function ProductSinglePage({ params }: Props) {
             Back to products
           </Link>
 
-          <div className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,520px)_minmax(0,1fr)] lg:items-center">
+          <div className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,520px)_minmax(0,1fr)] lg:items-start">
             <div>
               <ProductGallery
                 name={product.name}
@@ -121,7 +122,7 @@ export default async function ProductSinglePage({ params }: Props) {
 
             <div>
               <p className="text-sm font-bold text-[var(--color-primary)]">
-                {getDivisionLabel(product.division)} equipment
+                 
               </p>
               <h1 className="mt-4 text-4xl font-bold leading-tight text-slate-950 md:text-5xl">
                 {product.name}

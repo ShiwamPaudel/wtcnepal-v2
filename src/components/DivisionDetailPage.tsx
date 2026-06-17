@@ -82,9 +82,9 @@ export async function DivisionDetailPage({ divisionId }: DivisionDetailPageProps
         <div className="container-xl">
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-sm font-semibold text-[var(--color-primary)]">Partner network</p>
+              <p className="text-sm font-semibold text-[var(--color-primary)]"></p>
               <h2 className="mt-2 text-3xl font-bold text-slate-950">
-                {division.name} partner brands
+                Our Partners in {division.name} Division
               </h2>
             </div>
             <Link
@@ -126,9 +126,9 @@ export async function DivisionDetailPage({ divisionId }: DivisionDetailPageProps
         <div className="container-xl">
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-sm font-semibold text-[var(--color-primary)]">Product examples</p>
+              <p className="text-sm font-semibold text-[var(--color-primary)]"></p>
               <h2 className="mt-2 text-3xl font-bold text-slate-950">
-                {getDivisionLabel(divisionId)} products
+                Our Products across {getDivisionLabel(divisionId)} Division
               </h2>
             </div>
             <Link

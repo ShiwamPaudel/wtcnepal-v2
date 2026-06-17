@@ -4,7 +4,7 @@ import { AdminLoginForm } from '@/components/admin/AdminLoginForm';
 import { isAdminAuthenticated, isAdminLoginConfigured } from '@/lib/admin-auth';
 
 export const metadata: Metadata = {
-  title: 'Admin Login | WTC Nepal',
+  title: 'Admin | Web Trading Concern Pvt. Ltd.',
   robots: { index: false, follow: false },
 };
 

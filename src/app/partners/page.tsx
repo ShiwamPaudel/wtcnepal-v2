@@ -9,7 +9,7 @@ import { getDivisionLabel } from '@/lib/content';
 export const metadata: Metadata = constructMetadata({
   title: 'Our Global Partners',
   description:
-    'Explore WTC Nepal global partner brands across diagnostics, disinfection, and care medical equipment for healthcare providers in Nepal.',
+    'Explore Web Trading Concern Pvt. Ltd. global partner brands across diagnostics, disinfection, and care medical equipment for healthcare providers in Nepal.',
   path: '/partners',
 });
 

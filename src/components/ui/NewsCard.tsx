@@ -30,7 +30,7 @@ export function NewsCard({ article }: NewsCardProps) {
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-blue-50 via-slate-50 to-sky-50 p-6 text-center">
-            <span className="text-sm font-semibold text-[var(--color-primary)]">WTC Nepal Update</span>
+            <span className="text-sm font-semibold text-[var(--color-primary)]">Web Trading Concern Pvt. Ltd. Update</span>
           </div>
         )}
       </Link>

@@ -1,14 +1,14 @@
 import type { Metadata } from 'next';
 
 export const siteConfig = {
-  name: 'WTC Nepal',
+  name: 'Web Trading Concern Pvt. Ltd.',
   legalName: 'Web Trading Concern Pvt. Ltd.',
   description:
-    "WTC Nepal supplies, installs, and services diagnostics, disinfection, and care medical equipment for healthcare providers across Nepal.",
+    "Web Trading Concern Pvt. Ltd. supplies, installs, and services diagnostics, disinfection, and care medical equipment for healthcare providers across Nepal.",
   url: 'https://wtcnepal.com',
   ogImage: 'https://wtcnepal.com/images/logo.png',
   keywords: [
-    'WTC Nepal',
+    'Web Trading Concern Pvt. Ltd.',
     'medical equipment Nepal',
     'diagnostics equipment Nepal',
     'hospital equipment supplier Nepal',
@@ -49,7 +49,7 @@ export function constructMetadata({
     metadataBase: new URL(siteConfig.url),
     title: {
       default: title,
-      template: '%s | WTC Nepal',
+      template: '%s | Web Trading Concern Pvt. Ltd.',
     },
     description,
     keywords: siteConfig.keywords,

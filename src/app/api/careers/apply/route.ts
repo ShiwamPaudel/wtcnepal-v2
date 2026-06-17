@@ -62,7 +62,7 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error('Career application failed', error);
     return NextResponse.json(
-      { message: 'Could not send your application. Please contact WTC Nepal directly.' },
+      { message: 'Could not send your application. Please contact Web Trading Concern Pvt. Ltd. directly.' },
       { status: 500 },
     );
   }

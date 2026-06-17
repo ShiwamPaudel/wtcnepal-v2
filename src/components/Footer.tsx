@@ -14,7 +14,7 @@ export function Footer() {
           <div>
             <Image
               src="/images/wtc-white.png"
-              alt="WTC Nepal"
+              alt="Web Trading Concern Pvt. Ltd."
               width={112}
               height={112}
               className="h-24 w-24 object-contain"
@@ -71,9 +71,9 @@ export function Footer() {
               {[
                 ['About us', '/about'],
                 ['Our team', '/team'],
-                ['Global partners', '/partners'],
-                ['Service network', '/service-network'],
-                ['Career', '/career'],
+                ['Our Partners', '/partners'],
+                ['Service Network', '/service-network'],
+                ['Careers', '/career'],
                 ['News and Events', '/news-and-events'],
               ].map(([label, href]) => (
                 <li key={href}>

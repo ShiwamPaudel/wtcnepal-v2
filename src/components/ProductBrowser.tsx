@@ -18,6 +18,7 @@ import {
   getDivisionLabel,
   getSearchableProductText,
   normalizeText,
+  sortProductsForDisplay,
 } from '@/lib/content';
 import { ProductArtwork } from '@/components/ui/ProductArtwork';
 
@@ -37,14 +38,12 @@ export function ProductBrowser({
   divisions,
   initialDivision,
   initialCategory,
-  initialPartner,
   initialQuery,
 }: ProductBrowserProps) {
   const normalizedInitialDivision = divisions.some((item) => item.id === initialDivision) ? initialDivision! : 'all';
   const [query, setQuery] = useState(initialQuery ?? '');
   const [division, setDivision] = useState(normalizedInitialDivision);
   const [category, setCategory] = useState(initialCategory ?? 'all');
-  const [partner, setPartner] = useState(initialPartner ?? 'all');
   const [viewMode, setViewMode] = useState<ViewMode>('grid');
 
   const categoryOptions = useMemo(() => {
@@ -56,20 +55,14 @@ export function ProductBrowser({
     return Array.from(new Set(divisionCategories.map((item) => item.name))).sort();
   }, [division, divisions]);
 
-  const partnerOptions = useMemo(
-    () => Array.from(new Set(products.map((product) => product.partner))).sort(),
-    [products],
-  );
-
   const filteredProducts = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
 
-    return products.filter((product) => {
+    const matches = products.filter((product) => {
       const matchesQuery =
         normalizedQuery.length === 0 ||
         getSearchableProductText(product).includes(normalizedQuery);
       const matchesDivision = division === 'all' || product.division === division;
-      const matchesPartner = partner === 'all' || product.partner === partner;
       const matchesCategory =
         category === 'all' ||
         normalizeText(product.category ?? '') === normalizeText(category) ||
@@ -77,15 +70,16 @@ export function ProductBrowser({
           (normalizeText(product.name).includes(normalizeText(category)) ||
             normalizeText(product.description).includes(normalizeText(category))));
 
-      return matchesQuery && matchesDivision && matchesPartner && matchesCategory;
+      return matchesQuery && matchesDivision && matchesCategory;
     });
-  }, [category, division, partner, products, query]);
+
+    return sortProductsForDisplay(matches, { categoryMode: category !== 'all' });
+  }, [category, division, products, query]);
 
   const resetFilters = () => {
     setQuery('');
     setDivision('all');
     setCategory('all');
-    setPartner('all');
   };
 
   return (
@@ -131,7 +125,7 @@ export function ProductBrowser({
             </div>
           </div>
 
-          <div className="mt-8 grid gap-4 lg:grid-cols-[minmax(0,1fr)_190px_240px_190px_auto]">
+          <div className="mt-8 grid gap-4 lg:grid-cols-[minmax(0,1fr)_190px_240px_auto]">
             <label className="relative block">
               <span className="sr-only">Search products</span>
               <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
@@ -179,22 +173,6 @@ export function ProductBrowser({
               </select>
             </label>
 
-            <label>
-              <span className="sr-only">Partner</span>
-              <select
-                value={partner}
-                onChange={(event) => setPartner(event.target.value)}
-                className="h-12 w-full rounded-lg border border-slate-300 bg-white px-4 text-sm outline-none transition focus:border-[var(--color-primary)] focus:ring-4 focus:ring-blue-100"
-              >
-                <option value="all">All partners</option>
-                {partnerOptions.map((item) => (
-                  <option key={item} value={item}>
-                    {item}
-                  </option>
-                ))}
-              </select>
-            </label>
-
             <button
               type="button"
               onClick={resetFilters}
@@ -217,9 +195,6 @@ export function ProductBrowser({
             )}
             {category !== 'all' && (
               <span className="rounded-full bg-white px-3 py-1 ring-1 ring-slate-200">{category}</span>
-            )}
-            {partner !== 'all' && (
-              <span className="rounded-full bg-white px-3 py-1 ring-1 ring-slate-200">{partner}</span>
             )}
           </div>
         </div>

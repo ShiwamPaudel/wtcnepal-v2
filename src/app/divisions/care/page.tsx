@@ -5,7 +5,7 @@ import { constructMetadata } from '@/lib/seo';
 export const metadata: Metadata = constructMetadata({
   title: 'Care, Dermatology, Aesthetic and Critical Care Equipment',
   description:
-    'Explore WTC Nepal care solutions including dermatology lasers, aesthetic platforms, ICU monitors, ventilators, pumps, and clinical support.',
+    'Explore Web Trading Concern Pvt. Ltd. care solutions including dermatology lasers, aesthetic platforms, ICU monitors, ventilators, pumps, and clinical support.',
   path: '/divisions/care',
 });
 

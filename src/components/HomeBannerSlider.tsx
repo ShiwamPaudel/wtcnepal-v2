@@ -18,23 +18,20 @@ export function HomeBannerSlider({ banners }: { banners: HomeBanner[] }) {
   }, [banners.length]);
 
   if (banners.length === 0) return null;
+  const activeBanner = banners[activeIndex] ?? banners[0];
 
   return (
-    <section className="relative min-h-[90vh] overflow-hidden bg-slate-100">
-      {banners.map((banner, index) => (
-        <Image
-          key={banner.id}
-          src={banner.image}
-          alt={banner.alt || banner.title}
-          fill
-          priority={index === 0}
-          sizes="100vw"
-          className={`object-cover transition-opacity duration-1000 ${
-            index === activeIndex ? 'opacity-100' : 'opacity-0'
-          }`}
-          unoptimized={banner.image.startsWith('/api/media/')}
-        />
-      ))}
+    <section className="relative min-h-[58vw] overflow-hidden bg-slate-100 sm:min-h-[90vh]">
+      <Image
+        key={activeBanner.id}
+        src={activeBanner.image}
+        alt={activeBanner.alt || activeBanner.title}
+        fill
+        priority={activeIndex === 0}
+        sizes="100vw"
+        className="object-contain transition-opacity duration-700 sm:object-cover"
+        unoptimized={activeBanner.image.startsWith('/api/media/')}
+      />
 
       {banners.length > 1 && (
         <div className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 gap-2 rounded-full bg-white/70 p-2 backdrop-blur">

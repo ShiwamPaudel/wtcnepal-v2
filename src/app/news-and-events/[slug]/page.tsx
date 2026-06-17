@@ -38,7 +38,7 @@ function parseContentImages(value?: string) {
       current.push({
         type: 'image',
         src,
-        alt: alt || 'WTC Nepal news and events photo',
+        alt: alt || 'Web Trading Concern Pvt. Ltd. news and events photo',
         caption,
         key: `cms-image-${afterParagraph}-${index}`,
       });
@@ -64,7 +64,7 @@ function getArticleBlocks(article: NewsArticle): ArticleBlock[] {
         blocks.push({
           type: 'image',
           src: inlineImage[1].trim(),
-          alt: inlineImage[2]?.trim() || 'WTC Nepal news and events photo',
+          alt: inlineImage[2]?.trim() || 'Web Trading Concern Pvt. Ltd. news and events photo',
           caption: inlineImage[3]?.trim(),
           key: `inline-image-${index}`,
         });
@@ -92,7 +92,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!article) {
     return constructMetadata({
       title: 'Article Not Found',
-      description: 'The requested WTC Nepal article could not be found.',
+      description: 'The requested Web Trading Concern Pvt. Ltd. article could not be found.',
       path: `/news-and-events/${slug}`,
       noIndex: true,
     });

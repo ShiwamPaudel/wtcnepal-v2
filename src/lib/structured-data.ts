@@ -36,7 +36,7 @@ export function getLocalBusinessSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'MedicalBusiness',
-    name: 'WTC Nepal Kathmandu Office',
+    name: 'Web Trading Concern Pvt. Ltd. Kathmandu Office',
     image: absoluteUrl('/images/logo.png'),
     '@id': `${SITE_URL}/#headquarters`,
     url: SITE_URL,

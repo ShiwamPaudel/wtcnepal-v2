@@ -6,9 +6,9 @@ import { constructMetadata } from '@/lib/seo';
 import { getAboutPageContent } from '@/lib/server-content';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'About WTC Nepal | Healthcare Solutions Provider Since 2001',
+  title: 'About | Web Trading Concern Pvt. Ltd. | Best Medical Equipment Service Provider in Nepal',
   description:
-    "Learn about WTC Nepal, Nepal's medical equipment service provider for diagnostics, disinfection, and care solutions since 2001.",
+    "Learn about Web Trading Concern Pvt. Ltd., Best Medical Equipment Service Provider in Nepal.",
   path: '/about',
 });
 
@@ -108,7 +108,7 @@ export default async function AboutPage() {
               {aboutContent.directorImage ? (
                 <Image
                   src={aboutContent.directorImage}
-                  alt={aboutContent.directorImageAlt || aboutContent.directorName || 'WTC Nepal director'}
+                  alt={aboutContent.directorImageAlt || aboutContent.directorName || 'Director - Web Trading Concern Pvt. Ltd.'}
                   width={720}
                   height={900}
                   className="aspect-[4/5] w-full object-cover"
@@ -118,7 +118,7 @@ export default async function AboutPage() {
                 <div className="flex aspect-[4/5] items-center justify-center bg-white p-8">
                   <Image
                     src="/images/logo.png"
-                    alt="WTC Nepal"
+                    alt="Logo - Web Trading Concern Pvt. Ltd."
                     width={220}
                     height={86}
                     className="h-auto w-52 object-contain"

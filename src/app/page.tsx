@@ -34,8 +34,8 @@ function hasUsableYouTubeUrl(url: string) {
 }
 
 export const metadata: Metadata = constructMetadata({
-  title: "Nepal's Most Trusted Medical Equipment Service Provider | WTC Nepal",
-  description: "Leading medical equipment service provider in Nepal. Offering diagnostics, disinfection, and care solutions. Trusted by 25+ global brands since 2001. Find medical equipment, service centers, and healthcare solutions in Nepal.",
+  title: "Nepal's Most Trusted Medical Equipment Service Provider | Web Trading Concern Pvt. Ltd.",
+  description: "Best Medical Equipment Service Provider in Nepal. Trusted by 25+ MNCs since 2001.",
   path: '/',
 });
 
@@ -114,7 +114,7 @@ export default async function Home() {
                 width={760}
                 height={660}
                 className="w-full object-contain drop-shadow-[0_25px_55px_rgba(15,23,42,0.16)]"
-                priority
+                loading="lazy"
                 unoptimized
               />
             </div>
@@ -212,7 +212,6 @@ export default async function Home() {
                   height={96}
                   className="max-h-24 max-w-full object-contain"
                   loading="lazy"
-                  unoptimized
                 />
               </div>
             ))}
@@ -244,7 +243,6 @@ export default async function Home() {
                   height={96}
                   className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-[var(--color-primary)]"
                   loading="lazy"
-                  unoptimized
                 />
                 <div className="font-bold text-lg mb-1">{t.name}</div>
                 <div className="text-sm text-gray-500 mb-1">{t.designation}</div>
@@ -256,7 +254,6 @@ export default async function Home() {
                     height={64}
                     className="h-16 w-auto object-contain"
                     loading="lazy"
-                    unoptimized
                   />
                   <span className="text-sm text-gray-500">{t.institution}</span>
                 </div>
@@ -269,6 +266,8 @@ export default async function Home() {
                     <iframe
                       src={normalizeYouTubeUrl(t.youtube)}
                       title={t.name + ' testimonial'}
+                      loading="lazy"
+                      referrerPolicy="strict-origin-when-cross-origin"
                       allowFullScreen
                       className="w-full h-full border-0 rounded-xl"
                     />
@@ -302,7 +301,6 @@ export default async function Home() {
                   height={96}
                   className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-[var(--color-primary)]"
                   loading="lazy"
-                  unoptimized
                 />
                 <div className="font-bold text-lg mb-1">{t.name}</div>
                 <div className="text-sm text-gray-500 mb-1">{t.designation}</div>
@@ -314,7 +312,6 @@ export default async function Home() {
                     height={64}
                     className="h-16 w-auto object-contain"
                     loading="lazy"
-                    unoptimized
                   />
                   <span className="text-sm text-gray-500">{t.institution}</span>
                 </div>
@@ -327,6 +324,8 @@ export default async function Home() {
                     <iframe
                       src={normalizeYouTubeUrl(t.youtube)}
                       title={t.name + ' testimonial'}
+                      loading="lazy"
+                      referrerPolicy="strict-origin-when-cross-origin"
                       allowFullScreen
                       className="w-full h-full border-0 rounded-xl"
                     />
@@ -413,12 +412,11 @@ export default async function Home() {
             <div className="relative overflow-hidden rounded-lg bg-slate-50 p-6">
               <Image
                 src="/images/map-of-nepal-wtc-rays.png"
-                alt="WTC Nepal service reach map"
+                alt="Service Reach Map - Web Trading Concern Pvt. Ltd."
                 width={900}
                 height={640}
                 className="h-auto w-full object-contain"
                 loading="lazy"
-                unoptimized
               />
             </div>
           </ScrollReveal>
@@ -450,24 +448,6 @@ export default async function Home() {
           </Link>
         </div>
       </SectionWrapper>
-
-      {/* <section className="py-24 bg-gray-50">
-        <div className="container-xl">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl font-bold mb-6">Stay Updated</h2>
-            <p className="text-xl text-gray-600 mb-8">
-              For product demonstrations, partner announcements, and service updates, connect with
-              the WTC Nepal team directly.
-            </p>
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center rounded-lg bg-[var(--color-primary)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--color-accent)]"
-            >
-              Contact WTC Nepal
-            </Link>
-          </div>
-        </div>
-      </section> */}
 
       {/* 10. CTA BANNER */}
       <ScrollReveal direction="none">

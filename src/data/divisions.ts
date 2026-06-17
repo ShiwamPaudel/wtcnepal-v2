@@ -61,17 +61,17 @@ export const divisions: DivisionInfo[] = [
     ],
     faq: [
       {
-        question: 'What diagnostic equipment does WTC Nepal supply?',
+        question: 'What diagnostic equipment does Web Trading Concern Pvt. Ltd. supply?',
         answer:
-          'WTC Nepal supplies IVD equipment including clinical chemistry analyzers, hematology systems, immunoassay platforms, point-of-care devices, reagents, and consumables.',
+          'Web Trading Concern Pvt. Ltd. supplies IVD equipment including clinical chemistry analyzers, hematology systems, immunoassay platforms, point-of-care devices, reagents, and consumables.',
       },
       {
         question: 'Do you provide installation and after-sales support?',
         answer:
-          'Yes. WTC Nepal provides installation coordination, user training, preventive maintenance, and corrective service support.',
+          'Yes. Web Trading Concern Pvt. Ltd. provides installation coordination, user training, preventive maintenance, and corrective service support.',
       },
       {
-        question: 'Can WTC Nepal supply reagents and consumables regularly?',
+        question: 'Can Web Trading Concern Pvt. Ltd. supply reagents and consumables regularly?',
         answer:
           'Yes. The team can coordinate recurring supply plans for reagents, controls, calibrators, and consumables.',
       },
@@ -90,7 +90,7 @@ export const divisions: DivisionInfo[] = [
     description:
       'Hospital-grade disinfection, sterilization, hygiene, and waste treatment solutions.',
     longDescription:
-      "WTC Nepal's Disinfection division supports infection prevention and control workflows for healthcare facilities. The portfolio includes sterilization systems, surface and air hygiene products, healthcare waste treatment technology, and validation support for safer clinical environments.",
+      "Web Trading Concern Pvt. Ltd.'s Disinfection division supports infection prevention and control workflows for healthcare facilities. The portfolio includes sterilization systems, surface and air hygiene products, healthcare waste treatment technology, and validation support for safer clinical environments.",
     offerings: [
       'Cleaning & Scrubbing Automations',
       'Chemicals, Mops, Tools & Accessories',
@@ -128,9 +128,9 @@ export const divisions: DivisionInfo[] = [
     ],
     faq: [
       {
-        question: 'What sterilization equipment does WTC Nepal provide?',
+        question: 'What sterilization equipment does Web Trading Concern Pvt. Ltd. provide?',
         answer:
-          'WTC Nepal can support autoclaves, low-temperature sterilization systems, washer-disinfectors, waste treatment systems, and related consumables.',
+          'Web Trading Concern Pvt. Ltd. can support autoclaves, low-temperature sterilization systems, washer-disinfectors, waste treatment systems, and related consumables.',
       },
       {
         question: 'Do you supply chemical disinfectants as well as equipment?',
@@ -140,7 +140,7 @@ export const divisions: DivisionInfo[] = [
       {
         question: 'Can you support validation and training?',
         answer:
-          'Yes. WTC Nepal can help with user training, validation planning, and preventive service schedules.',
+          'Yes. Web Trading Concern Pvt. Ltd. can help with user training, validation planning, and preventive service schedules.',
       },
     ],
   },
@@ -157,7 +157,7 @@ export const divisions: DivisionInfo[] = [
     description:
       '',
     longDescription:
-      "WTC Nepal's Care division connects healthcare providers with technology for dermatology, aesthetic care, ICU monitoring, respiratory support, and clinical treatment workflows. The team supports product selection, demonstrations, user training, and ongoing service needs.",
+      "Web Trading Concern Pvt. Ltd.'s Care division connects healthcare providers with technology for dermatology, aesthetic care, ICU monitoring, respiratory support, and clinical treatment workflows. The team supports product selection, demonstrations, user training, and ongoing service needs.",
     offerings: [
       'Ventilator System',
       'Arterial Blood Gas (ABG) Analyzers',
@@ -194,19 +194,19 @@ export const divisions: DivisionInfo[] = [
     ],
     faq: [
       {
-        question: 'What dermatology and aesthetic equipment does WTC Nepal supply?',
+        question: 'What dermatology and aesthetic equipment does Web Trading Concern Pvt. Ltd. supply?',
         answer:
-          'WTC Nepal can support laser systems, aesthetic platforms, dermatology accessories, and care technology through partner brands.',
+          'Web Trading Concern Pvt. Ltd. can support laser systems, aesthetic platforms, dermatology accessories, and care technology through partner brands.',
       },
       {
-        question: 'Does WTC Nepal supply critical care equipment?',
+        question: 'Does Web Trading Concern Pvt. Ltd. supply critical care equipment?',
         answer:
           'Yes. The Care division includes ICU monitoring, respiratory support, infusion systems, and related critical care equipment.',
       },
       {
         question: 'Do you provide training for device operators?',
         answer:
-          'Yes. WTC Nepal can coordinate user training, demonstrations, and ongoing application support.',
+          'Yes. Web Trading Concern Pvt. Ltd. can coordinate user training, demonstrations, and ongoing application support.',
       },
     ],
   },

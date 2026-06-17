@@ -6,7 +6,7 @@ import { constructMetadata } from '@/lib/seo';
 export const metadata: Metadata = constructMetadata({
   title: 'Service Network | Medical Equipment Support Across Nepal',
   description:
-    'Find WTC Nepal medical equipment service locations and technical support coverage for diagnostics, disinfection, and care equipment across Nepal.',
+    'Find Web Trading Concern Pvt. Ltd. medical equipment service locations and technical support coverage for diagnostics, disinfection, and care equipment across Nepal.',
   path: '/service-network',
 });
 
@@ -21,7 +21,7 @@ export default function ServiceNetworkPage() {
               Medical equipment service support across Nepal
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">
-              WTC Nepal supports installation, preventive maintenance, troubleshooting, and user
+              Web Trading Concern Pvt. Ltd. supports installation, preventive maintenance, troubleshooting, and user
               training through headquarters and regional service touchpoints.
             </p>
           </div>
@@ -68,7 +68,7 @@ export default function ServiceNetworkPage() {
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="text-3xl font-bold text-slate-950">Support built around uptime</h2>
             <p className="mt-4 text-lg leading-8 text-slate-600">
-              For critical healthcare equipment, fast support matters. WTC Nepal helps facilities
+              For critical healthcare equipment, fast support matters. Web Trading Concern Pvt. Ltd. helps facilities
               plan service schedules, training, consumables, and escalation paths before downtime
               becomes disruptive.
             </p>

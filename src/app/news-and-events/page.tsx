@@ -8,7 +8,7 @@ import { getPublishedNewsArticles } from '@/lib/server-content';
 export const metadata: Metadata = constructMetadata({
   title: 'News and Events | Healthcare Technology Updates',
   description:
-    'Read WTC Nepal news, events, product updates, service expansion notes, and healthcare equipment support updates in Nepal.',
+    'Read Web Trading Concern Pvt. Ltd. news, events, product updates, service expansion notes, and healthcare equipment support updates in Nepal.',
   path: '/news-and-events',
 });
 
@@ -22,7 +22,7 @@ export default async function NewsAndEventsPage() {
           <div className="max-w-4xl">
             <p className="text-sm font-bold text-[var(--color-primary)]">News and events</p>
             <h1 className="mt-4 text-4xl font-bold leading-tight text-slate-950 md:text-5xl">
-              Healthcare technology updates from WTC Nepal
+              Healthcare technology updates from Web Trading Concern Pvt. Ltd.
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">
               Company news, events, product portfolio updates, and field notes from Nepal&apos;s
@@ -46,7 +46,7 @@ export default async function NewsAndEventsPage() {
                     className="flex aspect-[16/10] items-center justify-center rounded-md bg-gradient-to-br from-blue-50 via-slate-50 to-sky-50 p-6 text-center"
                   >
                     <span className="text-sm font-semibold text-[var(--color-primary)]">
-                      WTC Nepal Update
+                      Web Trading Concern Pvt. Ltd. Update
                     </span>
                   </Link>
 
@@ -91,7 +91,7 @@ export default async function NewsAndEventsPage() {
             <div className="rounded-lg border border-dashed border-slate-300 bg-slate-50 p-10 text-center">
               <h2 className="text-2xl font-bold text-slate-950">Updates coming soon</h2>
               <p className="mt-2 text-slate-600">
-                WTC Nepal news and events will appear here once published.
+                Web Trading Concern Pvt. Ltd. news and events will appear here once published.
               </p>
             </div>
           )}
@@ -104,13 +104,13 @@ export default async function NewsAndEventsPage() {
             <h2 className="text-3xl font-bold text-slate-950">Stay close to new updates</h2>
             <p className="mt-4 text-lg leading-8 text-slate-600">
               For product demonstrations, partner announcements, and service updates, contact the
-              WTC Nepal team directly.
+              Web Trading Concern Pvt. Ltd. team directly.
             </p>
             <Link
               href="/contact"
               className="mt-8 inline-flex items-center justify-center rounded-lg bg-[var(--color-primary)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--color-accent)]"
             >
-              Contact WTC Nepal
+              Contact Web Trading Concern Pvt. Ltd.
             </Link>
           </div>
         </div>

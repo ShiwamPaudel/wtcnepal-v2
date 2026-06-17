@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!division) {
     return constructMetadata({
       title: 'Division Categories Not Found',
-      description: 'The requested WTC Nepal division categories could not be found.',
+      description: 'The requested Web Trading Concern Pvt. Ltd. division categories could not be found.',
       path: `/divisions/${id}/categories`,
       noIndex: true,
     });
@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return constructMetadata({
     title: `${division.name} Categories and Partner Brands`,
-    description: `Browse ${division.name.toLowerCase()} product categories and partner brands available through WTC Nepal.`,
+    description: `Browse ${division.name.toLowerCase()} product categories and partner brands available through Web Trading Concern Pvt. Ltd..`,
     path: `/divisions/${division.id}/categories`,
   });
 }

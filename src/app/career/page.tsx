@@ -8,7 +8,7 @@ import { getPublishedJobs } from '@/lib/server-content';
 export const metadata: Metadata = constructMetadata({
   title: 'Careers - Web Trading Concern Pvt. Ltd.',
   description:
-    'Explore career opportunities at WTC Nepal for biomedical service, healthcare technology, business development, and customer support roles.',
+    'Explore career opportunities at Web Trading Concern Pvt. Ltd. for biomedical service, healthcare technology, business development, and customer support roles.',
   path: '/career',
 });
 
@@ -78,7 +78,7 @@ export default async function CareerPage() {
               <p className="text-sm font-semibold text-[var(--color-primary)]">Current openings</p>
               <h2 className="mt-3 text-3xl font-bold text-slate-950">Current opportunities</h2>
               <p className="mt-4 text-lg leading-8 text-slate-600">
-                Explore open roles and share your application with the WTC Nepal team.
+                Explore open roles and share your application with the Web Trading Concern Pvt. Ltd. team.
               </p>
             </div>
 
@@ -134,7 +134,7 @@ export default async function CareerPage() {
 
             <div className="mt-10 text-center">
               <p className="text-slate-600">
-                Do not see a matching role? Send your profile and area of interest to the WTC Nepal team.
+                Do not see a matching role? Send your profile and area of interest to the Web Trading Concern Pvt. Ltd. team.
               </p>
               <Link
                 href="/contact"
