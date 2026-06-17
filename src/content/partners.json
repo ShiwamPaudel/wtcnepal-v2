@@ -47,39 +47,48 @@
     },
     {
       "id": "p10",
-      "name": "Diversey Taski",
+      "name": "Diversey",
       "country": "Switzerland",
       "image": "/images/Partners/Diversey.png",
       "division": "disinfection",
-      "description": "Cleaning, hygiene, and floor care solutions for healthcare environments.",
-      "website": "#"
+      "description": "Leading Manufacutrer & Supply Chain of Cleaning, Hygiene, Disinfection and Infection Prevention Tools & Chemicals",
+      "website": "https://www.solenis.com/en/"
     },
     {
       "id": "p11",
+      "name": "Taski",
+      "country": "Switzerland",
+      "image": "/images/Partners/Taski.png",
+      "division": "disinfection",
+      "description": "Leading Manufacturer of Cleaning, Hygiene & Scrubbing Automations.",
+      "website": "https://taski.com/"
+    },
+    {
+      "id": "p12",
       "name": "Ecosteryl",
       "country": "Belgium",
       "image": "/images/Partners/ecosteryl.png",
       "division": "disinfection",
-      "description": "Medical waste treatment and sterilization technology for safer healthcare waste handling.",
-      "website": "#"
+      "description": "Leader in Medical Waste Treatment with Electrical Technology.",
+      "website": "https://www.ecosteryl.com/en/"
     },
     {
-      "id": "p12",
+      "id": "p13",
       "name": "Hakerman",
       "country": "Turkey",
       "image": "/images/Partners/Hakerman.png",
       "division": "disinfection",
-      "description": "Sterilization and liquid waste treatment systems for infection prevention programs.",
-      "website": "#"
+      "description": "Leader in Liquid Waste Decontanimation with Ozone.",
+      "website": "https://hakerman.com/en/"
     },
     {
-      "id": "p13",
+      "id": "p14",
       "name": "Newster",
       "country": "Italy",
       "image": "/images/Partners/newster.png",
       "division": "disinfection",
-      "description": "Automated healthcare waste sterilization systems and infection control technology.",
-      "website": "#"
+      "description": "Leader & Pioneer in Solid Waste Sterilization with Frictional Heat Technology.",
+      "website": "https://www.newstergroup.com/"
     },
     {
       "id": "p18",
@@ -87,8 +96,8 @@
       "country": "USA",
       "image": "/images/Partners/Nihon Kohden.png",
       "division": "care",
-      "description": "Patient monitoring and critical care technologies for hospital care environments.",
-      "website": "#"
+      "description": "Leader in Ventilator & Critical Care Equipment.",
+      "website": "https://www.nihonkohden.com/index.html"
     },
     {
       "id": "p19",
@@ -96,8 +105,8 @@
       "country": "Germany",
       "image": "/images/Partners/asclepion.png",
       "division": "care",
-      "description": "Medical laser systems for dermatology, aesthetics, and specialist treatment settings.",
-      "website": "#"
+      "description": "Leader in Manufacturing of Laser, Optics & Aesthetic Technologies.",
+      "website": "https://asclepion.com/en/"
     },
     {
       "id": "p20",
@@ -105,8 +114,8 @@
       "country": "Spain",
       "image": "/images/Partners/Nesa World.png",
       "division": "care",
-      "description": "Non-invasive neuromodulation systems supporting advanced patient care programs.",
-      "website": "#"
+      "description": "Leader in Non-Invasive Neuromodulation Technology.",
+      "website": "https://nesa.world/"
     },
     {
       "id": "p21",
@@ -114,8 +123,8 @@
       "country": "Korea",
       "image": "/images/Partners/Bison.png",
       "division": "care",
-      "description": "Dermatology and aesthetic laser technology for clinical and specialist practices.",
-      "website": "#"
+      "description": "Leader in Korean Lasers, Fractional Co2 Lasers, Aestheics Lasers & Pain-free Laser Treatment Technologies.",
+      "website": "http://www.bisonmedical.com/"
     },
     {
       "id": "p22",
@@ -123,8 +132,8 @@
       "country": "India",
       "image": "/images/Partners/DermaIndia.png",
       "division": "care",
-      "description": "Dermatology setup accessories and care technology for clinics and treatment centers.",
-      "website": "#"
+      "description": "Manufacutring of Quality Dermatological Accessories, Units & Instruments.",
+      "website": "https://dermaindia.in/"
     }
   ]
 }
