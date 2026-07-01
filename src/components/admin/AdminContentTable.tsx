@@ -27,6 +27,14 @@ function publicHref(collection: CmsCollection, record: CmsItemRecord) {
   return '/career';
 }
 
+async function readJsonResponse(response: Response) {
+  try {
+    return await response.json();
+  } catch {
+    return { message: response.ok ? '' : 'Request failed without a JSON response.' };
+  }
+}
+
 export function AdminContentTable({
   collection,
   records,
@@ -49,7 +57,7 @@ export function AdminContentTable({
     if (response.ok) {
       router.refresh();
     } else {
-      const result = await response.json();
+      const result = await readJsonResponse(response);
       window.alert(result.message ?? 'Delete failed.');
     }
 

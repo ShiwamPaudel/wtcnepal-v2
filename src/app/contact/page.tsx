@@ -3,6 +3,10 @@ import { Clock, Mail, MapPin, Phone } from 'lucide-react';
 import ContactForm from '@/components/ContactForm';
 import { constructMetadata } from '@/lib/seo';
 
+const googleMapsPlaceQuery = 'Web Trading Concern Pvt. Ltd., Kathmandu, Nepal';
+const googleMapsPlaceUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(googleMapsPlaceQuery)}`;
+const googleMapsEmbedUrl = `https://www.google.com/maps?q=${encodeURIComponent(googleMapsPlaceQuery)}&output=embed`;
+
 export const metadata: Metadata = constructMetadata({
   title: 'Contact Web Trading Concern Pvt. Ltd. | Medical Equipment Service and Support',
   description:
@@ -93,7 +97,7 @@ export default function ContactPage() {
                 </p>
               </div>
               <a
-                href="https://maps.app.goo.gl/yfk9hScy2VantbaVA"
+                href={googleMapsPlaceUrl}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-[var(--color-primary)] hover:text-[var(--color-primary)]"
@@ -104,7 +108,7 @@ export default function ContactPage() {
             <div className="relative h-[360px] bg-slate-100 md:h-[460px]">
               <iframe
                 title="WTC Nepal office location on Google Maps"
-                src="https://www.google.com/maps?q=Kumari%20Marga%2C%20Tripureshwor%2C%20Kathmandu%2C%20Nepal&output=embed"
+                src={googleMapsEmbedUrl}
                 className="absolute inset-0 h-full w-full border-0"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"

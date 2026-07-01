@@ -4,6 +4,14 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Database, Loader2 } from 'lucide-react';
 
+async function readJsonResponse(response: Response) {
+  try {
+    return await response.json();
+  } catch {
+    return { message: response.ok ? '' : 'Request failed without a JSON response.' };
+  }
+}
+
 export function AdminSeedButton({ disabled }: { disabled: boolean }) {
   const router = useRouter();
   const [busy, setBusy] = useState(false);
@@ -19,7 +27,7 @@ export function AdminSeedButton({ disabled }: { disabled: boolean }) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action: 'seed' }),
     });
-    const result = await response.json();
+    const result = await readJsonResponse(response);
 
     if (response.ok) {
       setMessage('Seed complete.');

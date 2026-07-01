@@ -186,6 +186,41 @@ function slugify(value: string) {
     .replace(/^-+|-+$/g, '');
 }
 
+function asCleanString(value: unknown) {
+  return String(value ?? '').trim();
+}
+
+function cleanMultiline(value: unknown) {
+  return asCleanString(value)
+    .split('\n')
+    .map((item) => item.trim())
+    .filter(Boolean)
+    .join('\n');
+}
+
+function normalizeCmsPayload(collection: CmsCollection, payload: Record<string, unknown>) {
+  if (collection !== 'news') return payload;
+
+  const slug = slugify(asCleanString(payload.slug));
+  const division = asCleanString(payload.division);
+
+  return {
+    ...payload,
+    id: slugify(asCleanString(payload.id)),
+    slug,
+    title: asCleanString(payload.title),
+    excerpt: asCleanString(payload.excerpt),
+    content: asCleanString(payload.content),
+    contentImages: cleanMultiline(payload.contentImages),
+    date: asCleanString(payload.date) || new Date().toISOString().slice(0, 10),
+    readingTime: Number(payload.readingTime || 4),
+    division: ['diagnostics', 'disinfection', 'care', 'general'].includes(division) ? division : 'general',
+    image: asCleanString(payload.image),
+    author: asCleanString(payload.author) || 'Web Trading Concern Pvt. Ltd. Editorial Team',
+    published: payload.published !== false,
+  };
+}
+
 function parseRow<T>(value: unknown): T | null {
   if (typeof value !== 'string') return null;
 
@@ -460,12 +495,13 @@ export async function saveCmsItem(collection: CmsCollection, payload: Record<str
 
   await ensureCmsSchema();
 
-  const title = String(payload.title ?? payload.name ?? '');
-  const id = String(payload.id || payload.slug || slugify(title) || randomUUID());
+  const normalizedPayload = normalizeCmsPayload(collection, payload);
+  const title = String(normalizedPayload.title ?? normalizedPayload.name ?? '');
+  const id = String(normalizedPayload.id || normalizedPayload.slug || slugify(title) || randomUUID());
   const item = {
-    ...payload,
+    ...normalizedPayload,
     id,
-    ...(collection === 'news' ? { slug: String(payload.slug || id) } : {}),
+    ...(collection === 'news' ? { slug: String(normalizedPayload.slug || id) } : {}),
   };
   const updatedAt = nowIso();
 
@@ -482,8 +518,8 @@ export async function saveCmsItem(collection: CmsCollection, payload: Record<str
       collection,
       id,
       JSON.stringify(item),
-      payload.published === false ? 'draft' : 'published',
-      Number(payload.sortOrder ?? 0),
+      normalizedPayload.published === false ? 'draft' : 'published',
+      Number(normalizedPayload.sortOrder ?? 0),
       updatedAt,
       updatedAt,
     ],

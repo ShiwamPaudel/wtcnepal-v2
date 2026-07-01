@@ -17,6 +17,14 @@ function lineList(value: unknown) {
   return Array.isArray(value) ? value.join('\n') : asString(value);
 }
 
+function cleanMultiline(value: unknown) {
+  return asString(value)
+    .split('\n')
+    .map((item) => item.trim())
+    .filter(Boolean)
+    .join('\n');
+}
+
 async function readJsonResponse(response: Response) {
   try {
     return await response.json();
@@ -52,9 +60,21 @@ function serialize(collection: CmsCollection, formData: FormData) {
   }
 
   if (collection === 'news') {
+    const title = asString(base.title).trim();
+    const slug = asString(base.slug).trim();
+
     return {
       ...base,
+      slug,
+      title,
+      excerpt: asString(base.excerpt).trim(),
+      content: asString(base.content).trim(),
+      contentImages: cleanMultiline(base.contentImages),
+      date: asString(base.date) || new Date().toISOString().slice(0, 10),
       readingTime: Number(base.readingTime || 4),
+      division: asString(base.division) || 'general',
+      image: asString(base.image).trim(),
+      author: asString(base.author).trim() || 'Web Trading Concern Pvt. Ltd. Editorial Team',
       published: formData.get('published') === 'on',
     };
   }

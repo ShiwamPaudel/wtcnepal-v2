@@ -15,9 +15,50 @@ export const dynamic = 'force-dynamic';
 
 const collections = ['products', 'news', 'team', 'jobs', 'home-banners', 'page-assets', 'about-page'];
 
+type CmsRequestBody = {
+  action?: unknown;
+  collection?: unknown;
+  item?: unknown;
+};
+
 function parseCollection(value: unknown): CmsCollection {
   if (typeof value === 'string' && collections.includes(value)) return value as CmsCollection;
   throw new Error('Unknown CMS collection.');
+}
+
+async function readJsonBody(request: Request): Promise<CmsRequestBody> {
+  let body: unknown;
+
+  try {
+    body = await request.json();
+  } catch {
+    throw new Error('Invalid JSON request.');
+  }
+
+  if (!body || typeof body !== 'object' || Array.isArray(body)) {
+    throw new Error('Invalid CMS request.');
+  }
+
+  return body as CmsRequestBody;
+}
+
+function parseCmsItem(value: unknown) {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) {
+    throw new Error('Missing CMS item data.');
+  }
+
+  return value as Record<string, unknown>;
+}
+
+function cmsErrorStatus(message: string) {
+  return [
+    'Invalid JSON request.',
+    'Invalid CMS request.',
+    'Missing CMS item data.',
+    'Unknown CMS collection.',
+  ].includes(message)
+    ? 400
+    : 500;
 }
 
 function revalidateCollection(collection: CmsCollection, id?: string) {
@@ -79,21 +120,25 @@ export async function POST(request: Request) {
   }
 
   try {
-    const body = await request.json();
+    const body = await readJsonBody(request);
 
-    if (body?.action === 'seed') {
+    if (body.action === 'seed') {
       await seedCmsFromLocalContent();
       return NextResponse.json(await getAdminCmsContent());
     }
 
     const collection = parseCollection(body.collection);
-    const item = await saveCmsItem(collection, body.item ?? {});
+    const item = await saveCmsItem(collection, parseCmsItem(body.item));
     revalidateCollection(collection, String(item.id));
+    if (collection === 'news' && typeof item.slug === 'string' && item.slug !== item.id) {
+      revalidatePath(`/news/${item.slug}`);
+      revalidatePath(`/news-and-events/${item.slug}`);
+    }
 
     return NextResponse.json(await getAdminCmsContent());
   } catch (error) {
     const message = error instanceof Error ? error.message : 'CMS save failed.';
-    return NextResponse.json({ message }, { status: 500 });
+    return NextResponse.json({ message }, { status: cmsErrorStatus(message) });
   }
 }
 
@@ -119,6 +164,6 @@ export async function DELETE(request: Request) {
     return NextResponse.json(await getAdminCmsContent());
   } catch (error) {
     const message = error instanceof Error ? error.message : 'CMS delete failed.';
-    return NextResponse.json({ message }, { status: 500 });
+    return NextResponse.json({ message }, { status: message === 'Unknown CMS collection.' ? 400 : 500 });
   }
 }
