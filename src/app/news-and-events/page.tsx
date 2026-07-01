@@ -6,7 +6,7 @@ import { getDivisionLabel } from '@/lib/content';
 import { getPublishedNewsArticles } from '@/lib/server-content';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'News and Events | Healthcare Technology Updates',
+  title: 'News and Events | Web Trading Concern Pvt. Ltd. | Trusted Medical Equipment Service Provider in Nepal',
   description:
     'Read Web Trading Concern Pvt. Ltd. news, events, product updates, service expansion notes, and healthcare equipment support updates in Nepal.',
   path: '/news-and-events',
@@ -22,11 +22,10 @@ export default async function NewsAndEventsPage() {
           <div className="max-w-4xl">
             <p className="text-sm font-bold text-[var(--color-primary)]">News and events</p>
             <h1 className="mt-4 text-4xl font-bold leading-tight text-slate-950 md:text-5xl">
-              Healthcare technology updates from Web Trading Concern Pvt. Ltd.
+              News & Events
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">
-              Company news, events, product portfolio updates, and field notes from Nepal&apos;s
-              medical equipment and service landscape.
+              
             </p>
           </div>
         </div>
