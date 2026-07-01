@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import type { Metadata } from 'next';
 import { ArrowRight, Calendar, Clock } from 'lucide-react';
 import { constructMetadata } from '@/lib/seo';
@@ -42,11 +43,22 @@ export default async function NewsAndEventsPage() {
                 >
                   <Link
                     href={`/news-and-events/${article.slug}`}
-                    className="flex aspect-[16/10] items-center justify-center rounded-md bg-gradient-to-br from-blue-50 via-slate-50 to-sky-50 p-6 text-center"
+                    className="relative flex aspect-[16/10] items-center justify-center overflow-hidden rounded-md bg-gradient-to-br from-blue-50 via-slate-50 to-sky-50 p-6 text-center"
                   >
-                    <span className="text-sm font-semibold text-[var(--color-primary)]">
-                      Web Trading Concern Pvt. Ltd. Update
-                    </span>
+                    {article.image ? (
+                      <Image
+                        src={article.image}
+                        alt={article.title}
+                        fill
+                        sizes="(max-width: 1024px) 92vw, 280px"
+                        className="object-cover transition-transform duration-500 hover:scale-105"
+                        unoptimized={article.image.startsWith('/api/media/')}
+                      />
+                    ) : (
+                      <span className="text-sm font-semibold text-[var(--color-primary)]">
+                        Web Trading Concern Pvt. Ltd. Update
+                      </span>
+                    )}
                   </Link>
 
                   <div>

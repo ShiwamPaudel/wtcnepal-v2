@@ -25,6 +25,13 @@ function cleanMultiline(value: unknown) {
     .join('\n');
 }
 
+function countArticleParagraphs(value: unknown) {
+  return asString(value)
+    .split('\n\n')
+    .map((block) => block.trim())
+    .filter((block) => block && !block.toLowerCase().startsWith('[image:')).length;
+}
+
 async function readJsonResponse(response: Response) {
   try {
     return await response.json();
@@ -37,6 +44,8 @@ function serialize(collection: CmsCollection, formData: FormData) {
   const base = Object.fromEntries(formData.entries()) as Editable;
   delete base.imageFile;
   delete base.imageFiles;
+  delete base.contentImageFiles;
+  delete base.contentImageParagraph;
   delete base.directorImageFile;
 
   if (collection === 'products') {
@@ -182,6 +191,47 @@ export function AdminItemForm({
         }
 
         formData.set('images', [...existingImages, ...uploadedImages].join('\n'));
+      }
+    }
+
+    if (collection === 'news') {
+      const contentImageFiles = formData
+        .getAll('contentImageFiles')
+        .filter((file): file is File => file instanceof File && file.size > 0);
+
+      if (contentImageFiles.length > 0) {
+        const existingContentImages = asString(formData.get('contentImages'))
+          .split('\n')
+          .map((item) => item.trim())
+          .filter(Boolean);
+        const requestedParagraph = Number(formData.get('contentImageParagraph') || 0);
+        const paragraphCount = countArticleParagraphs(formData.get('content'));
+        const finalParagraph = Math.max(paragraphCount, 1);
+        const paragraphNumber = requestedParagraph > 0 ? Math.min(requestedParagraph, finalParagraph) : finalParagraph;
+        const uploadedContentImages: string[] = [];
+
+        for (const file of contentImageFiles) {
+          const mediaData = new FormData();
+          mediaData.set('file', file);
+
+          const mediaResponse = await fetch('/api/admin/media', {
+            method: 'POST',
+            body: mediaData,
+          });
+          const mediaResult = await readJsonResponse(mediaResponse);
+
+          if (!mediaResponse.ok) {
+            setMessage(mediaResult.message ?? 'News detail image upload failed.');
+            setBusy(false);
+            return;
+          }
+
+          uploadedContentImages.push(
+            `${paragraphNumber} | ${mediaResult.url} | ${file.name.replace(/\.[^.]+$/, '')}`,
+          );
+        }
+
+        formData.set('contentImages', [...existingContentImages, ...uploadedContentImages].join('\n'));
       }
     }
 
@@ -412,6 +462,7 @@ function NewsFields({ item }: { item: Editable }) {
         rows={4}
         helper="Optional: one per line as paragraph number | image URL | alt text | caption. Example: 2 | /api/media/id | Product demo | Training session."
       />
+      <NewsDetailImagesField />
       <div className="grid gap-5 md:grid-cols-2">
         <Field name="date" label="Date" value={item.date} type="date" required />
         <Field name="readingTime" label="Reading time" value={item.readingTime ?? 4} type="number" required />
@@ -425,6 +476,35 @@ function NewsFields({ item }: { item: Editable }) {
       />
       <Field name="author" label="Author" value={item.author ?? 'Web Trading Concern Pvt. Ltd. Editorial Team'} />
     </>
+  );
+}
+
+function NewsDetailImagesField() {
+  return (
+    <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+      <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_180px]">
+        <label className="block">
+          <span className="text-sm font-semibold text-slate-700">Upload detail page photos</span>
+          <input
+            name="contentImageFiles"
+            type="file"
+            accept="image/*"
+            multiple
+            className="mt-2 block w-full rounded-xl border border-slate-200 bg-white p-3 text-sm"
+          />
+          <span className="mt-2 block text-xs leading-5 text-slate-500">
+            Selected photos are added to the detail page photo list when this article is saved.
+          </span>
+        </label>
+        <Field
+          name="contentImageParagraph"
+          label="After paragraph"
+          value=""
+          type="number"
+          helper="Leave empty to place uploaded photos after the final paragraph."
+        />
+      </div>
+    </div>
   );
 }
 
