@@ -327,8 +327,18 @@ export async function seedCmsFromLocalContent() {
 
   await ensureCmsSchema();
   const createdAt = nowIso();
-  const statements = Object.entries(collectionFallbacks).flatMap(([collection, items]) =>
-    items.map((item, index) => {
+  const existingCollections = await db.execute(
+    'SELECT collection, COUNT(*) AS count FROM cms_items GROUP BY collection',
+  );
+  const collectionsWithContent = new Set(
+    existingCollections.rows
+      .filter((row) => Number(row.count) > 0)
+      .map((row) => String(row.collection)),
+  );
+  const statements = Object.entries(collectionFallbacks).flatMap(([collection, items]) => {
+    if (collectionsWithContent.has(collection)) return [];
+
+    return items.map((item, index) => {
       const record = item as { id?: string; slug?: string; title?: string; name?: string };
       const id = record.id || record.slug || slugify(record.title || record.name || randomUUID());
 
@@ -338,8 +348,8 @@ export async function seedCmsFromLocalContent() {
           VALUES (?, ?, ?, 'published', ?, ?, ?)`,
         args: [collection, id, JSON.stringify({ ...record, id }), index, createdAt, createdAt],
       };
-    }),
-  );
+    });
+  });
 
   if (statements.length > 0) {
     await db.batch(statements, 'write');

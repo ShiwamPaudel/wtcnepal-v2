@@ -127,7 +127,7 @@ export default async function NewsAndEventsArticlePage({ params }: Props) {
   return (
     <main className="min-h-screen bg-white">
       <article>
-        <section className="border-b border-slate-200 bg-slate-50 py-16">
+        <section className="border-b border-slate-200 bg-gradient-to-b from-slate-50 to-white py-16">
           <div className="container-xl">
             <Link
               href="/news-and-events"
@@ -159,41 +159,83 @@ export default async function NewsAndEventsArticlePage({ params }: Props) {
               </h1>
               <p className="mt-6 text-xl leading-8 text-slate-600">{article.excerpt}</p>
             </div>
+
+            {article.image && (
+              <figure className="mt-12 overflow-hidden rounded-lg border border-slate-200 bg-white shadow-[0_24px_70px_rgba(15,23,42,0.12)]">
+                <div className="relative aspect-[16/9] bg-slate-100">
+                  <Image
+                    src={article.image}
+                    alt={article.title}
+                    fill
+                    sizes="(max-width: 1280px) 92vw, 1180px"
+                    className="object-cover"
+                    priority
+                    unoptimized={article.image.startsWith('/api/media/')}
+                  />
+                </div>
+              </figure>
+            )}
           </div>
         </section>
 
-        <section className="py-16">
+        <section className="py-16 md:py-20">
           <div className="container-xl">
-            <div className="mx-auto max-w-3xl">
-              {blocks.map((block) => {
-                if (block.type === 'image') {
-                  return (
-                    <figure key={block.key} className="my-10 overflow-hidden rounded-lg border border-slate-200 bg-slate-50">
-                      <div className="relative aspect-[16/10] bg-white">
-                        <Image
-                          src={block.src}
-                          alt={block.alt}
-                          fill
-                          sizes="(max-width: 768px) 92vw, 768px"
-                          className="object-cover"
-                          unoptimized={block.src.startsWith('/api/media/')}
-                        />
-                      </div>
-                      {block.caption && (
-                        <figcaption className="px-5 py-3 text-sm leading-6 text-slate-500">
-                          {block.caption}
-                        </figcaption>
-                      )}
-                    </figure>
-                  );
-                }
+            <div className="mx-auto grid max-w-5xl gap-10 lg:grid-cols-[180px_minmax(0,760px)]">
+              <aside className="hidden border-r border-slate-200 pr-8 text-sm text-slate-500 lg:block">
+                <dl className="sticky top-28 grid gap-5">
+                  <div>
+                    <dt className="font-semibold text-slate-950">Published</dt>
+                    <dd className="mt-1">{article.date}</dd>
+                  </div>
+                  <div>
+                    <dt className="font-semibold text-slate-950">Reading time</dt>
+                    <dd className="mt-1">{article.readingTime} min read</dd>
+                  </div>
+                  {article.division !== 'general' && (
+                    <div>
+                      <dt className="font-semibold text-slate-950">Division</dt>
+                      <dd className="mt-1">{getDivisionLabel(article.division)}</dd>
+                    </div>
+                  )}
+                </dl>
+              </aside>
 
-                return (
-                  <p key={block.key} className="mb-6 text-justify text-lg leading-8 text-slate-700">
-                    {block.text}
-                  </p>
-                );
-              })}
+              <div className="min-w-0">
+                {blocks.map((block, index) => {
+                  if (block.type === 'image') {
+                    return (
+                      <figure key={block.key} className="my-10 overflow-hidden rounded-lg border border-slate-200 bg-slate-50">
+                        <div className="relative aspect-[16/10] bg-white">
+                          <Image
+                            src={block.src}
+                            alt={block.alt}
+                            fill
+                            sizes="(max-width: 1024px) 92vw, 760px"
+                            className="object-cover"
+                            unoptimized={block.src.startsWith('/api/media/')}
+                          />
+                        </div>
+                        {block.caption && (
+                          <figcaption className="px-5 py-3 text-sm leading-6 text-slate-500">
+                            {block.caption}
+                          </figcaption>
+                        )}
+                      </figure>
+                    );
+                  }
+
+                  return (
+                    <p
+                      key={block.key}
+                      className={`text-lg leading-8 text-slate-700 md:text-xl md:leading-9 ${
+                        index === 0 ? 'mb-8 text-slate-800' : 'mb-7'
+                      }`}
+                    >
+                      {block.text}
+                    </p>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </section>

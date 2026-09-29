@@ -16,7 +16,7 @@ import { NewsCard } from '@/components/ui/NewsCard';
 import { divisions } from '@/data/divisions';
 import { partners } from '@/data/partners';
 import { getHomeBanners, getPublishedNewsArticles, getProducts } from '@/lib/server-content';
-import { ShieldCheck, Users, Map as MapIcon, ArrowRight } from 'lucide-react';
+import { ShieldCheck, Users, Map as MapIcon, ArrowRight, ExternalLink } from 'lucide-react';
 
 function normalizeYouTubeUrl(url: string) {
   if (!url) return url;
@@ -196,7 +196,7 @@ export default async function Home() {
         <div className="container-xl text-center mb-10">
           <h2 className="text-2xl font-bold mb-3">Our World-Class Partners</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Proud channel partners of 25+ multinational healthcare companies, guaranteeing global standards for local healthcare providers.
+            Proud channel partners of 15+ multinational healthcare companies, guaranteeing global standards for local healthcare providers.
           </p>
         </div>
         
@@ -222,6 +222,17 @@ export default async function Home() {
           <Link href="/partners" className="text-sm font-bold text-[var(--color-accent)] hover:underline">
             View All Partners &rarr;
           </Link>
+          <p className="mt-4 text-sm text-gray-600">
+            Discover Non-Invasive Neuromodulation Technology by our principal partner Nesa World at{' '}
+            <a
+              href="https://nesanepal.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center font-semibold text-[var(--color-primary)] hover:text-[var(--color-accent)] hover:underline transition-colors"
+            >
+              nesanepal.com <ExternalLink className="w-3.5 h-3.5 ml-1" />
+            </a>
+          </p>
         </div>
       </section>
 
