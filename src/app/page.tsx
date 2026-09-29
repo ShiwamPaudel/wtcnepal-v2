@@ -13,25 +13,11 @@ import { getOrganizationSchema, getLocalBusinessSchema } from '@/lib/structured-
 import type { Metadata } from 'next';
 
 import { NewsCard } from '@/components/ui/NewsCard';
+import { TestimonialCard } from '@/components/ui/TestimonialCard';
 import { divisions } from '@/data/divisions';
 import { partners } from '@/data/partners';
 import { getHomeBanners, getPublishedNewsArticles, getProducts } from '@/lib/server-content';
 import { ShieldCheck, Users, Map as MapIcon, ArrowRight, ExternalLink } from 'lucide-react';
-
-function normalizeYouTubeUrl(url: string) {
-  if (!url) return url;
-  if (url.includes('watch?v=')) {
-    return url.replace('watch?v=', 'embed/');
-  }
-  if (url.includes('youtu.be/')) {
-    return url.replace('youtu.be/', 'www.youtube.com/embed/');
-  }
-  return url;
-}
-
-function hasUsableYouTubeUrl(url: string) {
-  return Boolean(url);
-}
 
 export const metadata: Metadata = constructMetadata({
   title: "Nepal's Most Trusted Medical Equipment Service Provider | Web Trading Concern Pvt. Ltd.",
@@ -237,58 +223,15 @@ export default async function Home() {
       </section>
 
       {/* 6. PARTNER TESTIMONIALS */}
-      <SectionWrapper className="py-24">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+      <SectionWrapper bgAlt className="py-24">
+        <div className="text-center max-w-3xl mx-auto mb-14">
           <span className="text-[var(--color-primary)] font-bold tracking-wider uppercase text-sm mb-2 block">What Our Partners Say</span>
-          <h2 className="mb-6">Trusted by Principal Companies</h2>
+          <h2 className="mb-0">Trusted by Principal Companies</h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          {partnerTestimonials.map((t, idx) => (
-            <div key={idx} className="flex flex-col md:flex-row bg-white rounded-xl shadow p-8 gap-8 items-center">
-              {/* Left: Person Info */}
-              <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left">
-                <Image
-                  src={t.image}
-                  alt={t.name}
-                  width={96}
-                  height={96}
-                  className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-[var(--color-primary)]"
-                  loading="lazy"
-                />
-                <div className="font-bold text-lg mb-1">{t.name}</div>
-                <div className="text-sm text-gray-500 mb-1">{t.designation}</div>
-                <div className="flex flex-col items-center md:items-start gap-2 mb-4">
-                  <Image
-                    src={t.institutionLogo}
-                    alt={t.institution}
-                    width={160}
-                    height={64}
-                    className="h-16 w-auto object-contain"
-                    loading="lazy"
-                  />
-                  <span className="text-sm text-gray-500">{t.institution}</span>
-                </div>
-                <blockquote className="italic text-[var(--color-primary)] border-l-4 border-[var(--color-accent)] pl-4 mt-2">&quot;{t.quote}&quot;</blockquote>
-              </div>
-              {/* Right: Video (Larger) */}
-              <div className="flex-1 w-full flex justify-center">
-                <div className="aspect-video w-full max-w-xl rounded-xl overflow-hidden shadow-lg">
-                  {hasUsableYouTubeUrl(t.youtube) ? (
-                    <iframe
-                      src={normalizeYouTubeUrl(t.youtube)}
-                      title={t.name + ' testimonial'}
-                      loading="lazy"
-                      referrerPolicy="strict-origin-when-cross-origin"
-                      allowFullScreen
-                      className="w-full h-full border-0 rounded-xl"
-                    />
-                  ) : (
-                    <div className="flex h-full w-full items-center justify-center bg-slate-100 p-6 text-center text-sm font-semibold text-slate-500">
-                      Video coming soon
-                    </div>
-                  )}
-                </div>
-              </div>
+        <div className="flex flex-wrap justify-center gap-8">
+          {partnerTestimonials.map((t) => (
+            <div key={t.name} className="w-full md:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-4rem)/3)]">
+              <TestimonialCard testimonial={t} />
             </div>
           ))}
         </div>
@@ -296,57 +239,14 @@ export default async function Home() {
 
       {/* 7. CUSTOMER TESTIMONIALS */}
       <SectionWrapper className="py-24">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-14">
           <span className="text-[var(--color-primary)] font-bold tracking-wider uppercase text-sm mb-2 block">Voices of Trust</span>
-          <h2 className="mb-6">What Our Customers Say</h2>
+          <h2 className="mb-0">What Our Customers Say</h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          {customerTestimonials.map((t, idx) => (
-            <div key={idx} className="flex flex-col md:flex-row bg-white rounded-xl shadow p-8 gap-8 items-center">
-              {/* Left: Person Info */}
-              <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left">
-                <Image
-                  src={t.image}
-                  alt={t.name}
-                  width={96}
-                  height={96}
-                  className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-[var(--color-primary)]"
-                  loading="lazy"
-                />
-                <div className="font-bold text-lg mb-1">{t.name}</div>
-                <div className="text-sm text-gray-500 mb-1">{t.designation}</div>
-                <div className="flex flex-col items-center md:items-start gap-2 mb-4">
-                  <Image
-                    src={t.institutionLogo}
-                    alt={t.institution}
-                    width={160}
-                    height={64}
-                    className="h-16 w-auto object-contain"
-                    loading="lazy"
-                  />
-                  <span className="text-sm text-gray-500">{t.institution}</span>
-                </div>
-                <blockquote className="italic text-[var(--color-primary)] border-l-4 border-[var(--color-accent)] pl-4 mt-2">&quot;{t.quote}&quot;</blockquote>
-              </div>
-              {/* Right: Video (Larger) */}
-              <div className="flex-1 w-full flex justify-center">
-                <div className="aspect-video w-full max-w-xl rounded-xl overflow-hidden shadow-lg">
-                  {hasUsableYouTubeUrl(t.youtube) ? (
-                    <iframe
-                      src={normalizeYouTubeUrl(t.youtube)}
-                      title={t.name + ' testimonial'}
-                      loading="lazy"
-                      referrerPolicy="strict-origin-when-cross-origin"
-                      allowFullScreen
-                      className="w-full h-full border-0 rounded-xl"
-                    />
-                  ) : (
-                    <div className="flex h-full w-full items-center justify-center bg-slate-100 p-6 text-center text-sm font-semibold text-slate-500">
-                      Video coming soon
-                    </div>
-                  )}
-                </div>
-              </div>
+        <div className="flex flex-wrap justify-center gap-8">
+          {customerTestimonials.map((t) => (
+            <div key={t.name} className="w-full md:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-4rem)/3)]">
+              <TestimonialCard testimonial={t} />
             </div>
           ))}
         </div>
